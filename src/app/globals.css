@@ -57,3 +57,6 @@
     @apply bg-background text-foreground;
   }
 }
+._cards {
+  box-shadow: 5px 7px 5px black;
+}
