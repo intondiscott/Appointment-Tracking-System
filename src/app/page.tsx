@@ -17,6 +17,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { CircleUserRound } from "lucide-react";
 const getData = async () => {
   const data = await fetch("http://localhost:3000/api/accounts/", {
     next: { revalidate: 10 },
@@ -35,16 +36,22 @@ export default async function HomePage() {
       <CarouselContent className=''>
         {data.map((res: any) =>
           res.accounts.map((item: any, idx: number) => (
-            <CarouselItem key={idx} className='pl-4'>
+            <CarouselItem key={idx} className='pl-4 '>
               <div className='p-1'>
-                <Card className='bg-gray-700 text-white'>
-                  <CardContent className='flex flex-col aspect-square items-center  p-6'>
-                    <Image
-                      src='/assets/artifact.gif'
-                      alt='alt'
-                      width={300}
-                      height={200}
-                    />
+                <Card className='bg-gray-700 text-white _cards m-8'>
+                  <CardContent className='flex flex-col aspect-square items-center  p-6 '>
+                    {item.picture == "" ? (
+                      <CircleUserRound className='w-60 h-60' />
+                    ) : (
+                      <Image
+                        className='rounded-full w-60 h-60'
+                        src={`/assets/${item.picture}`}
+                        alt='alt'
+                        width={300}
+                        height={200}
+                      />
+                    )}
+
                     <span className='text-3xl font-semibold'>
                       Name:{item.name}
                     </span>
