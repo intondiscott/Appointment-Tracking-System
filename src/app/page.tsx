@@ -36,10 +36,10 @@ export default async function HomePage() {
       <CarouselContent className=''>
         {data.map((res: any) =>
           res.accounts.map((item: any, idx: number) => (
-            <CarouselItem key={idx} className='pl-4'>
+            <CarouselItem key={idx} className='pl-4 '>
               <div className='p-1'>
-                <Card className='bg-gray-700 text-white'>
-                  <CardContent className='flex flex-col aspect-square items-center  p-6'>
+                <Card className='bg-gray-700 text-white _cards m-8'>
+                  <CardContent className='flex flex-col aspect-square items-center  p-6 '>
                     {item.picture == "" ? (
                       <CircleUserRound className='w-60 h-60' />
                     ) : (
