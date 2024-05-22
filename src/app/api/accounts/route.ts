@@ -4,11 +4,12 @@ export function GET() {
     {
       accounts: [
         {
+          id: 1,
           name: "scotty",
           age: 38,
         },
-        { name: "John", age: 18 },
-        { name: "Lisa", age: 79 },
+        { id: 2, name: "John", age: 18 },
+        { id: 3, name: "Lisa", age: 79 },
       ],
     },
   ];
