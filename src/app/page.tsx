@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 const getData = async () => {
-  const data = await fetch("http://localhost:3000/api/accounts", {
+  const data = await fetch("http://localhost:3000/api/accounts/", {
     next: { revalidate: 10 },
   });
   return data.json();
