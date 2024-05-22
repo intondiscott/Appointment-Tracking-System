@@ -16,7 +16,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
+import Image from "next/image";
 const getData = async () => {
   const data = await fetch("http://localhost:3000/api/accounts", {
     next: { revalidate: 10 },
@@ -38,7 +38,13 @@ export default async function HomePage() {
             <CarouselItem key={idx} className='pl-4'>
               <div className='p-1'>
                 <Card className='bg-gray-700 text-white'>
-                  <CardContent className='flex flex-col aspect-square items-center justify-center p-6'>
+                  <CardContent className='flex flex-col aspect-square items-center  p-6'>
+                    <Image
+                      src='/assets/artifact.gif'
+                      alt='alt'
+                      width={300}
+                      height={200}
+                    />
                     <span className='text-3xl font-semibold'>
                       Name:{item.name}
                     </span>
