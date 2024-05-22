@@ -7,9 +7,10 @@ export function GET() {
           id: 1,
           name: "scotty",
           age: 38,
+          picture: "image1.jpg",
         },
-        { id: 2, name: "John", age: 18 },
-        { id: 3, name: "Lisa", age: 79 },
+        { id: 2, name: "John", age: 18, picture: "image2.jpg" },
+        { id: 3, name: "Lisa", age: 79, picture: "" },
       ],
     },
   ];
