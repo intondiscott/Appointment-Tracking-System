@@ -9,6 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const getData = async () => {
   const data = await fetch("http://localhost:3000/api/accounts", {
     next: { revalidate: 10 },
@@ -18,19 +26,34 @@ const getData = async () => {
 export default async function HomePage() {
   const data = await getData();
   return (
-    <div>
-      {data.map((res: any) =>
-        res.accounts.map((item: any, idx: number) => (
-          <div key={idx}>
-            <Card className='bg-gray-700 text-white m-4'>
-              <CardHeader>
-                <CardTitle>Name: {item.name}</CardTitle>
-                <CardDescription>Age: {item.age}</CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-        ))
-      )}
-    </div>
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+      className='w-full max-w-sm mt-10 ml-[30%]'
+    >
+      <CarouselContent className=''>
+        {data.map((res: any) =>
+          res.accounts.map((item: any, idx: number) => (
+            <CarouselItem key={idx} className='pl-4'>
+              <div className='p-1'>
+                <Card className='bg-gray-700 text-white'>
+                  <CardContent className='flex flex-col aspect-square items-center justify-center p-6'>
+                    <span className='text-3xl font-semibold'>
+                      Name:{item.name}
+                    </span>
+                    <span className='text-2xl font-semibold'>
+                      Age: {item.age}
+                    </span>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))
+        )}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   );
 }
