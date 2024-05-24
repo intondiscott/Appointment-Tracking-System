@@ -53,10 +53,10 @@ export default async function HomePage() {
                     )}
 
                     <span className='text-3xl font-semibold'>
-                      Name:{item.name}
+                      Name : {item.name}
                     </span>
                     <span className='text-2xl font-semibold'>
-                      Age: {item.age}
+                      Age : {item.age}
                     </span>
                   </CardContent>
                 </Card>
