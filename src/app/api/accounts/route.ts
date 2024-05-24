@@ -5,12 +5,13 @@ export function GET() {
       accounts: [
         {
           id: 1,
-          name: "scotty",
+          name: 'scotty',
           age: 38,
-          picture: "image1.jpg",
+          picture: 'image1.jpg',
         },
-        { id: 2, name: "John", age: 18, picture: "image2.jpg" },
-        { id: 3, name: "Lisa", age: 79, picture: "" },
+        { id: 2, name: 'John', age: 18, picture: 'image2.jpg' },
+        { id: 3, name: 'Lisa', age: 79, picture: '' },
+        { id: 4, name: 'Olawale', age: 31, picture: '' },
       ],
     },
   ];
