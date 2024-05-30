@@ -20,7 +20,7 @@ import {
 const Header = () => {
     return (
         <header className="bg-gray-800 p-1  text-white ">
-            <nav className="flex justify-end p-1">
+            <nav className="flex justify-start p-1">
                 <Menubar className="bg-gray-800 text-white p-1">
                     <MenubarMenu>
                         <MenubarTrigger className="px-4 py-2 hover:bg-gray-700">Home</MenubarTrigger>
