@@ -17,66 +17,13 @@ type HeaderItem = {
   subItems?: SubItem[];
 };
 
-const headerData: HeaderItem[] = [
-  {
-    name: "Home",
-    subItems: [{ name: "Dashboard" }, { name: "Notifications" }],
-  },
-  {
-    name: "Appointments",
-    subItems: [
-      { name: "Schedule" },
-      { name: "My Appointments" },
-      { name: "Calendar" },
-    ],
-  },
-  {
-    name: "Clients",
-    subItems: [
-      { name: "Client List" },
-      { name: "Add New Client" },
-      { name: "Client History" },
-    ],
-  },
-  {
-    name: "Services",
-    subItems: [
-      { name: "Service List" },
-      { name: "Add New Service" },
-      { name: "Pricing" },
-    ],
-  },
-  {
-    name: "Billing",
-    subItems: [
-      { name: "Invoices" },
-      { name: "Payments" },
-      { name: "Billing Settings" },
-    ],
-  },
-  {
-    name: "Reports",
-    subItems: [
-      { name: "Appointment Reports" },
-      { name: "Revenue Reports" },
-      { name: "Client Reports" },
-    ],
-  },
-  {
-    name: "Settings",
-    subItems: [
-      { name: "Profile Settings" },
-      { name: "Notification Settings" },
-      { name: "Account Settings" },
-    ],
-  },
-  {
-    name: "Help",
-    subItems: [{ name: "Documentation" }, { name: "Support" }, { name: "FAQ" }],
-  },
-];
+const Header = async () => {
+  const getData = async () => {
+    const res = await fetch("http://localhost:3000/api/UI_Template");
+    return res.json();
+  };
+  const headerData = await getData();
 
-const Header = () => {
   return (
     <header className='bg-gray-800 p-1 text-white'>
       <nav className='flex justify-start p-1'>
