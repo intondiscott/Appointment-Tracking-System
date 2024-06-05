@@ -44,7 +44,7 @@ type DashboardData = {
 };
 
 const AdminDashboard = () => {
-    const [data, setData] = useState<DashboardData | null>(null);
+    const [data, setData] = useState<DashboardData>()!;
 
     useEffect(() => {
         // Fetch data or perform other client-side operations
