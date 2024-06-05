@@ -7,6 +7,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+
 type SubItem = {
   name: string;
 };
@@ -15,12 +16,14 @@ type HeaderItem = {
   name: string;
   subItems?: SubItem[];
 };
+
 const Header = async () => {
   const getData = async () => {
     const res = await fetch("http://localhost:3000/api/UI_Template");
     return res.json();
   };
   const headerData = await getData();
+
   return (
     <header className='bg-gray-800 p-1 text-white'>
       <nav className='flex justify-start p-1'>
