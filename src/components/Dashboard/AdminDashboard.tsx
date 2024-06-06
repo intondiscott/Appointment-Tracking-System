@@ -59,7 +59,7 @@ const AdminDashboard = () => {
         }
 
         fetchData();
-    }, []);
+    }, [setData]);
 
     if (!data) {
         return <div>Loading...</div>;
