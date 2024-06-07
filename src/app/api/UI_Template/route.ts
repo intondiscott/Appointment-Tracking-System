@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export function GET() {
   type SubItem = {
     name: string;
+    path?: string; // Add path property
   };
 
   type HeaderItem = {
@@ -12,65 +13,69 @@ export function GET() {
 
   const headerData: HeaderItem[] = [
     {
-      name: "Home",
-      subItems: [{ name: "Dashboard" }, { name: "Notifications" }],
-    },
-    {
-      name: "Appointments",
+      name: 'Home',
       subItems: [
-        { name: "Schedule" },
-        { name: "My Appointments" },
-        { name: "Calendar" },
+        { name: 'Dashboard', path: 'Admindashboard' },
+        { name: 'Notifications', path: 'yes' },
       ],
     },
     {
-      name: "Clients",
+      name: 'Appointments',
       subItems: [
-        { name: "Client List" },
-        { name: "Add New Client" },
-        { name: "Client History" },
+        { name: 'Schedule', path: 'yrd' },
+        { name: 'My Appointments', path: 'appointment' },
+        { name: 'Calendar', path: 'lkllk' },
       ],
     },
     {
-      name: "Services",
+      name: 'Clients',
       subItems: [
-        { name: "Service List" },
-        { name: "Add New Service" },
-        { name: "Pricing" },
+        { name: 'Client List', path: 'kjkkk' },
+        { name: 'Add New Client', path: 'kkkk' },
+        { name: 'Client History', path: 'kkkk' },
       ],
     },
     {
-      name: "Billing",
+      name: 'Services',
       subItems: [
-        { name: "Invoices" },
-        { name: "Payments" },
-        { name: "Billing Settings" },
+        { name: 'Service List', path: 'kkkk' },
+        { name: 'Add New Service', path: 'hgffgfg' },
+        { name: 'Pricing', path: 'jkjjj' },
       ],
     },
     {
-      name: "Reports",
+      name: 'Billing',
       subItems: [
-        { name: "Appointment Reports" },
-        { name: "Revenue Reports" },
-        { name: "Client Reports" },
+        { name: 'Invoices', path: 'klkklk' },
+        { name: 'Payments', path: 'hhhhh' },
+        { name: 'Billing Settings', path: '' },
       ],
     },
+    // {
+    //   name: 'Reports',
+    //   subItems: [
+    //     { name: 'Appointment Reports', path: '' },
+    //     { name: 'Revenue Reports', path: '' },
+    //     { name: 'Client Reports', path: '' },
+    //   ],
+    // },
+    // {
+    //   name: 'Settings',
+    //   subItems: [
+    //     { name: 'Profile Settings', path: '' },
+    //     { name: 'Notification Settings', path: '' },
+    //     { name: 'Account Settings', path: '' },
+    //   ],
+    // },
     {
-      name: "Settings",
+      name: 'Help',
       subItems: [
-        { name: "Profile Settings" },
-        { name: "Notification Settings" },
-        { name: "Account Settings" },
-      ],
-    },
-    {
-      name: "Help",
-      subItems: [
-        { name: "Documentation" },
-        { name: "Support" },
-        { name: "FAQ" },
+        { name: 'Documentation', path: '' },
+        { name: 'Support', path: '' },
+        { name: 'FAQ', path: '' },
       ],
     },
   ];
+
   return NextResponse.json(headerData);
 }
