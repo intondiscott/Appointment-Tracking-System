@@ -33,6 +33,13 @@ export function GET(req: NextRequest) {
           picture: "",
           appointment: "Help with api 😂",
         },
+        {
+          id: 5,
+          name: "Sam",
+          age: 24,
+          picture: "",
+          appointment: "",
+        },
       ],
     },
   ];
