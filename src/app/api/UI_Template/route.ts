@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export function GET() {
   type SubItem = {
@@ -13,42 +13,42 @@ export function GET() {
 
   const headerData: HeaderItem[] = [
     {
-      name: 'Home',
+      name: "Home",
       subItems: [
-        { name: 'Dashboard', path: 'Admindashboard' },
-        { name: 'Notifications', path: 'yes' },
+        { name: "Dashboard", path: "Admindashboard" },
+        { name: "Notifications", path: "yes" },
       ],
     },
     {
-      name: 'Appointments',
+      name: "Appointments",
       subItems: [
-        { name: 'Schedule', path: 'yrd' },
-        { name: 'My Appointments', path: 'appointment' },
-        { name: 'Calendar', path: 'lkllk' },
+        { name: "Schedule", path: "yrd" },
+        { name: "My Appointments", path: "appointment" },
+        { name: "Calendar", path: "lkllk" },
       ],
     },
     {
-      name: 'Clients',
+      name: "Clients",
       subItems: [
-        { name: 'Client List', path: 'kjkkk' },
-        { name: 'Add New Client', path: 'kkkk' },
-        { name: 'Client History', path: 'kkkk' },
+        { name: "Client List", path: "kjkkk" },
+        { name: "Add New Client", path: "kkkk" },
+        { name: "Client History", path: "kkkk" },
       ],
     },
     {
-      name: 'Services',
+      name: "Services",
       subItems: [
-        { name: 'Service List', path: 'kkkk' },
-        { name: 'Add New Service', path: 'hgffgfg' },
-        { name: 'Pricing', path: 'jkjjj' },
+        { name: "Service List", path: "kkkk" },
+        { name: "Add New Service", path: "hgffgfg" },
+        { name: "Pricing", path: "jkjjj" },
       ],
     },
     {
-      name: 'Billing',
+      name: "Billing",
       subItems: [
-        { name: 'Invoices', path: 'klkklk' },
-        { name: 'Payments', path: 'hhhhh' },
-        { name: 'Billing Settings', path: '' },
+        { name: "Invoices", path: "klkklk" },
+        { name: "Payments", path: "hhhhh" },
+        { name: "Billing Settings", path: "" },
       ],
     },
     // {
@@ -68,11 +68,11 @@ export function GET() {
     //   ],
     // },
     {
-      name: 'Help',
+      name: "Help",
       subItems: [
-        { name: 'Documentation', path: '' },
-        { name: 'Support', path: '' },
-        { name: 'FAQ', path: '' },
+        { name: "Documentation", path: "" },
+        { name: "Support", path: "" },
+        { name: "FAQ", path: "" },
       ],
     },
   ];
