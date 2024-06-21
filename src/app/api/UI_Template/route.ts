@@ -30,7 +30,7 @@ export function GET() {
     {
       name: "Clients",
       subItems: [
-        { name: "Client List", path: "kjkkk" },
+        { name: "Client List", path: "clients" },
         { name: "Add New Client", path: "kkkk" },
         { name: "Client History", path: "kkkk" },
       ],
