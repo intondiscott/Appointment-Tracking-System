@@ -1,11 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-interface HeaderProps {
-  onLoginClick: () => void;
-}
-
-const Header: FC<HeaderProps> = ({ onLoginClick }) => {
+const Header: FC = () => {
   return (
     <header className="bg-gray-800 text-white sticky top-0 flex items-center justify-between px-4 py-5">
       <nav className="flex justify-between w-full">
@@ -15,8 +11,7 @@ const Header: FC<HeaderProps> = ({ onLoginClick }) => {
           <li><Link href="/solution">Solution</Link></li>
         </ul>
         <ul className="flex space-x-8">
-          <li><button onClick={onLoginClick} className="hover:underline">Login</button></li>
-          <li><Link href="/request-demo" className="hover:underline">Request for Demo</Link></li>
+          <li><Link href="/Login"> Login </Link></li>
         </ul>
       </nav>
     </header>
