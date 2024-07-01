@@ -1,18 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
-  req: Request,
+  req: NextRequest,
   { params: { id } }: { params: { id: string } }
 ) {
   //const res = fetch("http://localhost:3000/api");
-  const data = await fetch("http://localhost:3000/api/accounts");
+  const data = await fetch("http://localhost:3000/api/accounts/", {
+    cache: "no-store",
+  });
   const returnedData = await data.json();
-  const userID = returnedData.map((res: any) =>
-    res.accounts.map((item: any) => {
-      if (id == item.id) {
-        return item;
-      } else;
-    })
-  );
-  return await NextResponse.json(userID);
+
+  return NextResponse.json(returnedData.map((item: any) => item.accounts[id]));
 }
