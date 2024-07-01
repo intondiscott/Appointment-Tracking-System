@@ -45,7 +45,7 @@ const Header = () => {
   const fakeLoginCheck = async (): Promise<boolean> => {
     // Simulate an API call delay and return a boolean value
     return new Promise(resolve => setTimeout(() => resolve(false), 1000)); // if you set resolve to true it is going to show the header of login
-    // i purposely put it to false to display the hompage header
+    // i purposely set it to false to display the hompage header
   };
 
   return (
