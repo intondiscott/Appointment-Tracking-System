@@ -1,12 +1,22 @@
-import React from "react";
 
+"use client";
+import React from "react";
+import { FormEvent } from "react";
+import LoggedIn from "./handleLogin";
+import { stringify } from "querystring";
 function loginPage() {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    LoggedIn(JSON.stringify(formData));
+    console.log(formData);
+  }
   return (
-    <div>
-      <form>
-        <input type='txt' placeholder='name' />
-      </form>
-    </div>
+    <form onSubmit={onSubmit}>
+      <input type='text' placeholder='name' />
+      <button type='submit'>submit</button>
+    </form>
+
   );
 }
 
