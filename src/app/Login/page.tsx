@@ -1,3 +1,4 @@
+
 "use client";
 import React from "react";
 import { FormEvent } from "react";
@@ -15,6 +16,7 @@ function loginPage() {
       <input type='text' placeholder='name' />
       <button type='submit'>submit</button>
     </form>
+
   );
 }
 
