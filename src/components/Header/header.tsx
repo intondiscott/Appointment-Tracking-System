@@ -1,10 +1,24 @@
-"use client"
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
-import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import LoggedIn from "@/app/Login/handleLogin";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import { Search, CircleUser } from "lucide-react";
 
 type SubItem = {
@@ -24,8 +38,8 @@ const Header = () => {
   // Simulate an API call to check if the user is logged in
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const loggedIn = await fakeLoginCheck();
-      setIsLoggedIn(loggedIn);
+      //const loggedIn = await fakeLoginCheck();
+      setIsLoggedIn(LoggedIn(""));
     };
 
     checkLoginStatus();
@@ -42,10 +56,12 @@ const Header = () => {
     fetchData();
   }, []);
 
-  const fakeLoginCheck = async (): Promise<boolean> => {
+  const fakeLoginCheck = () => {
     // Simulate an API call delay and return a boolean value
-    return new Promise(resolve => setTimeout(() => resolve(false), 1000)); // if you set resolve to true it is going to show the header of when it logged in
+    // if you set resolve to true it is going to show the header of when it logged in
     // i purposely set it to false to display the hompage header
+
+    return LoggedIn;
   };
 
   return (
@@ -62,8 +78,15 @@ const Header = () => {
                   {headerItem.subItems && (
                     <MenubarContent className='bg-gray-800 text-white'>
                       {headerItem.subItems.map((subItem, subIndex) => (
-                        <MenubarItem key={subIndex} className='hover:bg-gray-700 px-4 py-2'>
-                          {subItem.path ? <Link href={subItem.path}>{subItem.name}</Link> : subItem.name}
+                        <MenubarItem
+                          key={subIndex}
+                          className='hover:bg-gray-700 px-4 py-2'
+                        >
+                          {subItem.path ? (
+                            <Link href={subItem.path}>{subItem.name}</Link>
+                          ) : (
+                            subItem.name
+                          )}
                         </MenubarItem>
                       ))}
                     </MenubarContent>
@@ -73,21 +96,29 @@ const Header = () => {
             </Menubar>
           </nav>
 
-          <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-            <form className="ml-auto flex-1 sm:flex-initial">
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input type="search" placeholder="Search products..." className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]" />
+          <div className='flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4'>
+            <form className='ml-auto flex-1 sm:flex-initial'>
+              <div className='relative'>
+                <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
+                <Input
+                  type='search'
+                  placeholder='Search products...'
+                  className='pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]'
+                />
               </div>
             </form>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="secondary" size="icon" className="rounded-full">
-                  <CircleUser className="h-5 w-5" />
-                  <span className="sr-only">Toggle user menu</span>
+                <Button
+                  variant='secondary'
+                  size='icon'
+                  className='rounded-full'
+                >
+                  <CircleUser className='h-5 w-5' />
+                  <span className='sr-only'>Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align='end'>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -100,18 +131,26 @@ const Header = () => {
           </div>
         </header>
       ) : (
-          <header className="bg-gray-800 text-white sticky top-0 flex items-center justify-between px-4 py-5">
-            <nav className="flex justify-between w-full">
-              <ul className="flex space-x-8">
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About</Link></li>
-                <li><Link href="/solution">Solution</Link></li>
-              </ul>
-              <ul className="flex space-x-8">
-                <li><Link href="/Login"> Login </Link></li>
-              </ul>
-            </nav>
-          </header>
+        <header className='bg-gray-800 text-white sticky top-0 flex items-center justify-between px-4 py-5'>
+          <nav className='flex justify-between w-full'>
+            <ul className='flex space-x-8'>
+              <li>
+                <Link href='/'>Home</Link>
+              </li>
+              <li>
+                <Link href='/about'>About</Link>
+              </li>
+              <li>
+                <Link href='/solution'>Solution</Link>
+              </li>
+            </ul>
+            <ul className='flex space-x-8'>
+              <li>
+                <Link href='/Login'> Login </Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
       )}
     </>
   );
