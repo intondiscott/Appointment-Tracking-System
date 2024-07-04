@@ -1,10 +1,10 @@
 import { userAgentFromString } from "next/server";
 
-const LoggedIn = (userName: string) => {
-  if (userName == "") {
-    return false;
+const LoggedIn = (userName: string = "") => {
+  if (userName == "scotty") {
+    return true;
   }
-  return true;
+  return false;
 };
 
 export default LoggedIn;
