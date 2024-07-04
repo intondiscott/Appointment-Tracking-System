@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import LoggedIn from "@/app/Login/handleLogin";
+
 import {
   Menubar,
   MenubarContent,
@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Search, CircleUser } from "lucide-react";
+import loginPage from "@/app/Login/page";
+import LoggedIn from "@/app/Login/handleLogin";
 
 type SubItem = {
   name: string;
@@ -39,7 +41,10 @@ const Header = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       //const loggedIn = await fakeLoginCheck();
-      setIsLoggedIn(LoggedIn(""));
+      const res = await fetch("http://localhost:3000/api/users");
+      const data = await res.json();
+      await setIsLoggedIn(LoggedIn(data[0].userName));
+      //console.log(isLoggedIn);
     };
 
     checkLoginStatus();
@@ -59,7 +64,7 @@ const Header = () => {
   const fakeLoginCheck = () => {
     // Simulate an API call delay and return a boolean value
     // if you set resolve to true it is going to show the header of when it logged in
-    // i purposely set it to false to display the hompage header
+    // i purposely set it to false to display the homepage header
 
     return LoggedIn;
   };
