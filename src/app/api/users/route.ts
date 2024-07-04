@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function GET() {
-  const users = [{ userName: "scott" }];
+  const users = [{ userName: "scotty" }];
   return NextResponse.json(users);
 }
 
