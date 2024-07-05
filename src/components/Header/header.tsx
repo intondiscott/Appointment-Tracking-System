@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -43,8 +42,8 @@ const Header = () => {
     const checkLoginStatus = async () => {
       //const loggedIn = await fakeLoginCheck();
       const res = await fetch("http://localhost:3000/api/users");
-      const data = await res.json();
-      await setIsLoggedIn(LoggedIn(data[0].userName));
+      //const data = await res.json();
+      //await setIsLoggedIn(LoggedIn(data[0].userName));
       //console.log(isLoggedIn);
     };
 
@@ -159,7 +158,6 @@ const Header = () => {
         </header>
       )}
     </>
-
   );
 };
 

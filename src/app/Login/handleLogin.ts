@@ -1,7 +1,5 @@
-import { userAgentFromString } from "next/server";
-
-const LoggedIn = (userName: string = "") => {
-  if (userName == "scotty") {
+const LoggedIn = (userName: string = "", password: string = "") => {
+  if (userName === "admin" && password === "1234") {
     return true;
   }
   return false;
