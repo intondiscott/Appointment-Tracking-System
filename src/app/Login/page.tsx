@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from "react";
 import LoggedIn from "./handleLogin";
 import { useRouter } from "next/navigation";
-import User from "../Models/users";
-import mongoose from "mongoose";
+
 
 function LoginPage() {
   const r = useRouter();
