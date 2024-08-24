@@ -1,29 +1,20 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
 import LoggedIn from "./Login/handleLogin";
-import User from "./Models/users";
-import mongoose from "mongoose";
 
-export default function HomePage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+import { auth } from "./(Auth)/auth";
+import { SignOut } from "@/components/Sign-In-Out/sign-out";
+import SignIn from "../components/Sign-In-Out/sign-in";
+import Link from "next/link";
+
+export default async function HomePage() {
   let user: string;
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      //const loggedIn = await fakeLoginCheck();
-      const res = await fetch("http://localhost:3000/api/users");
-
-      const data = await res.json();
-      //just to lookup all users and if one is correct show logged in...
-      data.map((info: any) => {
-        if (LoggedIn(info.userName, info.password))
-          setIsLoggedIn(LoggedIn(info.userName, info.password));
-      });
-    };
-
-    checkLoginStatus();
-  }, []);
+  const session = await auth();
+  console.log(session);
 
   return (
-    <>{isLoggedIn ? <div>Is Logged In...</div> : <div>Not Logged In...</div>}</>
+    <div>
+      <h1 className='text-9xl'>{session?.user?.name}</h1>
+      <img className=' border-rose-950' src={session?.user?.image} />
+      {session?.user ? <SignOut /> : <Link href='Login'>Sign In</Link>}
+    </div>
   );
 }

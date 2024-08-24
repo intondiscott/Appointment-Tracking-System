@@ -21,7 +21,7 @@ export default async function Clients() {
             key={idx}
             className='bg-gray-700 text-white _cards ml-10 mr-10 mt-2'
           >
-            <CardContent className='flex flex-col p-6  '>
+            <CardContent className='flex flex-col p-6'>
               {items.picture == "" ? (
                 <CircleUserRound className='w-20 h-20 ml-auto' />
               ) : (

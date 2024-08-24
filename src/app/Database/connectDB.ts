@@ -8,7 +8,7 @@ const connectMongoDB = async () => {
 
     message = { message: "MongoDB connected..." };
   } catch (error) {
-    message = { message: "error" };
+    message = { message: error };
   }
   console.log({ message });
 };
