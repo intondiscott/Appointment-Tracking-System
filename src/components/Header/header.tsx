@@ -20,8 +20,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Search, CircleUser } from "lucide-react";
-import loginPage from "@/app/Login/page";
-import LoggedIn from "@/app/Login/handleLogin";
 
 type SubItem = {
   name: string;
@@ -66,7 +64,7 @@ const Header = () => {
     // if you set resolve to true it is going to show the header of when it logged in
     // i purposely set it to false to display the homepage header
 
-    return LoggedIn;
+    return;
   };
 
   return (
