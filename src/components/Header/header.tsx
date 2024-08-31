@@ -1,5 +1,3 @@
-"use client";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import {
@@ -20,6 +18,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Search, CircleUser } from "lucide-react";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 type SubItem = {
   name: string;
@@ -31,67 +31,44 @@ type HeaderItem = {
   subItems?: SubItem[];
 };
 
-const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [headerData, setHeaderData] = useState<HeaderItem[]>([]);
-
-  // Simulate an API call to check if the user is logged in
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      //const loggedIn = await fakeLoginCheck();
-      const res = await fetch("http://localhost:3000/api/users");
-      //const data = await res.json();
-      //await setIsLoggedIn(LoggedIn(data[0].userName));
-      //console.log(isLoggedIn);
-    };
-
-    checkLoginStatus();
-  }, []);
-
+const Header = async () => {
   // Fetch header data
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:3000/api/UI_Template");
-      const data = await res.json();
-      setHeaderData(data);
-    };
 
-    fetchData();
-  }, []);
-
-  const fakeLoginCheck = () => {
-    // Simulate an API call delay and return a boolean value
-    // if you set resolve to true it is going to show the header of when it logged in
-    // i purposely set it to false to display the homepage header
-
-    return;
+  const fetchData = async () => {
+    const res = await fetch("http://localhost:3000/api/UI_Template");
+    const data = await res.json();
   };
 
+  const session = await auth();
+  const res = await fetch("http://localhost:3000/api/UI_Template");
+  const data = await res.json();
   return (
     <>
-      {isLoggedIn ? (
+      {session ? (
         <header className='bg-gray-800 p-1 text-white sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6'>
           <nav className='flex justify-start p-1'>
             <Menubar className='bg-gray-800 text-white p-1'>
-              {headerData.map((headerItem, index) => (
+              {data.map((headerItem: any, index: number) => (
                 <MenubarMenu key={index}>
                   <MenubarTrigger className='px-4 py-2 hover:bg-gray-700'>
                     {headerItem.name}
                   </MenubarTrigger>
                   {headerItem.subItems && (
                     <MenubarContent className='bg-gray-800 text-white'>
-                      {headerItem.subItems.map((subItem, subIndex) => (
-                        <MenubarItem
-                          key={subIndex}
-                          className='hover:bg-gray-700 px-4 py-2'
-                        >
-                          {subItem.path ? (
-                            <Link href={subItem.path}>{subItem.name}</Link>
-                          ) : (
-                            subItem.name
-                          )}
-                        </MenubarItem>
-                      ))}
+                      {headerItem.subItems.map(
+                        (subItem: any, subIndex: number) => (
+                          <MenubarItem
+                            key={subIndex}
+                            className='hover:bg-gray-700 px-4 py-2'
+                          >
+                            {subItem.path ? (
+                              <Link href={subItem.path}>{subItem.name}</Link>
+                            ) : (
+                              subItem.name
+                            )}
+                          </MenubarItem>
+                        )
+                      )}
                     </MenubarContent>
                   )}
                 </MenubarMenu>

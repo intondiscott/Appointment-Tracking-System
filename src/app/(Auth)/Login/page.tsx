@@ -15,6 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { login, providerSignin } from "@/app/action/user";
+import { auth, signIn } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default function ProfileForm() {
   // ...
@@ -37,9 +40,10 @@ export default function ProfileForm() {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+      <form action={login} className='space-y-8'>
         <FormField
           control={form.control}
           name='email'
@@ -47,10 +51,10 @@ export default function ProfileForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn@email.com' {...field} />
+                <Input placeholder='example@email.com' {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                This is your public display email.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -65,9 +69,7 @@ export default function ProfileForm() {
               <FormControl>
                 <Input placeholder='password' type='password' {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription></FormDescription>
               <FormMessage />
             </FormItem>
           )}

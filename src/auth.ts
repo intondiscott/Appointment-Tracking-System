@@ -1,46 +1,51 @@
-import NextAuth from "next-auth";
-import { ZodError } from "zod";
-import Credentials from "next-auth/providers/credentials";
+import NextAuth, { CredentialsSignin } from "next-auth";
 
-import client from "@/lib/db";
-//import { signInSchema } from "./lib/zod";
-// Your own logic for dealing with plaintext password strings; be careful!
-//import { saltAndHashPassword } from "@/utils/password";
-//import { getUserFromDb } from "@/utils/db"
+import Credentials from "next-auth/providers/credentials";
+import connectMongoDB from "./app/Database/connectDB";
+import User from "./app/Models/users";
+import { compare } from "bcryptjs";
+import GitHub from "next-auth/providers/github";
+import { redirect } from "next/navigation";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  pages: {
+    signIn: "/Login",
+  },
   providers: [
+    GitHub,
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "email", placeholder: "email" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "password",
+        },
       },
       authorize: async (credentials) => {
-        try {
-          let user = null;
+        const email = credentials.email as string | undefined;
+        const password = credentials.password as string | undefined;
 
-          //const { email, password } = await signInSchema.parseAsync(credentials)
-
-          // logic to salt and hash password
-          //const pwHash = password
-
-          // logic to verify if the user exists
-          user = { email: "Scotty@gmail.com", password: "1234" };
-
-          if (!user) {
-            throw new Error("User not found.");
-          }
-
-          // return JSON object with the user data
-          return user;
-        } catch (error) {
-          if (error instanceof ZodError) {
-            // Return `null` to indicate that the credentials are invalid
-            return null;
-          }
+        if (!email || !password) {
+          throw new CredentialsSignin(" Provide email and password");
         }
+        await connectMongoDB();
+        const user = await User.findOne({ email });
+        if (!user)
+          throw new CredentialsSignin({ cause: "Invalid email or password" });
+        if (!user.password)
+          throw new CredentialsSignin({ cause: "Invalid email or password" });
+        const isMatched = await compare(password, user.password);
+        if (!isMatched) throw new Error("Invalid email or password");
+        const userData = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          password: user.password,
+        };
+        return userData;
       },
     }),
   ],

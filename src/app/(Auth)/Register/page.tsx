@@ -70,9 +70,7 @@ export default function SignUp() {
               <FormControl>
                 <Input placeholder='first name' {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+
               <FormMessage />
             </FormItem>
           )}
@@ -86,9 +84,7 @@ export default function SignUp() {
               <FormControl>
                 <Input placeholder='last name' {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+
               <FormMessage />
             </FormItem>
           )}
@@ -100,10 +96,10 @@ export default function SignUp() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn@email.com' {...field} />
+                <Input placeholder='example@email.com' {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                This is your public display email.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -118,9 +114,7 @@ export default function SignUp() {
               <FormControl>
                 <Input placeholder='password' type='password' {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+
               <FormMessage />
             </FormItem>
           )}

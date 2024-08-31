@@ -1,4 +1,5 @@
-import { signIn } from "@/app/(Auth)/auth";
+("use server");
+import { signIn } from "@/auth";
 
 export default function SignIn() {
   return (
