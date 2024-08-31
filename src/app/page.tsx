@@ -4,18 +4,27 @@ import Link from "next/link";
 import User from "./Models/users";
 import { LogOut } from "./action/user";
 import { Button } from "@/components/ui/button";
-
+import { Avatar } from "@/components/ui/avatar";
+import Image from "next/image";
+import { checkSession } from "./(Auth)/checkSession";
 export default async function HomePage() {
   const session = await auth();
-  console.log(session);
+
   return (
     <div>
-      {session ? <h1>{session?.user?.email}</h1> : <h1>Not logged In</h1>}
-
-      {session && (
-        <form action={LogOut}>
-          <Button type='submit'>Log Out</Button>
-        </form>
+      {session ? (
+        <div className=' rounded-full  font-bold'>
+          <h1>{session.user?.name}</h1>
+          <Image
+            className='rounded-full'
+            src={`/assets/${session.user?.image}`}
+            alt='alt'
+            width={60}
+            height={60}
+          />
+        </div>
+      ) : (
+        <h1>Not logged In</h1>
       )}
     </div>
   );

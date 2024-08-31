@@ -20,7 +20,8 @@ import { Input } from "@/components/ui/input";
 import { Search, CircleUser } from "lucide-react";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-
+import Image from "next/image";
+import { LogOut } from "@/app/action/user";
 type SubItem = {
   name: string;
   path?: string;
@@ -94,7 +95,13 @@ const Header = async () => {
                   size='icon'
                   className='rounded-full'
                 >
-                  <CircleUser className='h-5 w-5' />
+                  <Image
+                    className='rounded-full'
+                    src={`/assets/${session.user?.image!}`}
+                    alt='alt'
+                    width={60}
+                    height={60}
+                  />
                   <span className='sr-only'>Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>
@@ -103,7 +110,11 @@ const Header = async () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <form action={LogOut}>
+                    <button type='submit'>Logout</button>
+                  </form>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Reports</DropdownMenuItem>
               </DropdownMenuContent>

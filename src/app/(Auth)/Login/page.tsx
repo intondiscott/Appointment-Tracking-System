@@ -1,5 +1,3 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,67 +13,54 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { login, providerSignin } from "@/app/action/user";
+import { GoogleSignin, login, GitHubSignin } from "@/app/action/user";
 import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
+import Google from "next-auth/providers/google";
+import { ChromeIcon } from "lucide-react";
+import { Goblin_One } from "next/font/google";
+import Image from "next/image";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
-export default function ProfileForm() {
-  // ...
-  const formSchema = z.object({
-    email: z.string().min(2, "Email is required"),
-    password: z
-      .string()
-      .min(1, "Password is required")
-      .min(8, "Password must be at least 8 characters long"),
-  });
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
-
+const Login = async () => {
+  //return session;
+  const session = await auth();
+  if (session) redirect("/");
   return (
-    <Form {...form}>
+    <Card className='max-w-sm p-6 bg-slate-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
       <form action={login} className='space-y-8'>
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder='example@email.com' {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display email.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder='password' type='password' {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type='submit'>Submit</Button>
+        <Label>Email</Label>
+
+        <Input name='email' placeholder='example@email.com' />
+
+        <Label>Password</Label>
+
+        <Input name='password' placeholder='password' type='password' />
+        <div className=''>
+          <Button type='submit' className='m-2'>
+            Login
+          </Button>
+          <Button className='m-2'>
+            <Link href={"/Register"}>Register</Link>
+          </Button>
+        </div>
       </form>
-    </Form>
+
+      {/*<form action={GoogleSignin}>
+        <button type='submit'>
+          <Image
+            className='rounded-full'
+            src='/assets/Google.jpg'
+            alt='alt'
+            width={40}
+            height={40}
+          />
+          Sign in to Google
+        </button>
+      </form>*/}
+    </Card>
   );
-}
+};
+export default Login;

@@ -1,3 +1,5 @@
+import { checkSession } from "@/app/(Auth)/checkSession";
+import { auth } from "@/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { CircleUserRound } from "lucide-react";
 import Image from "next/image";
@@ -8,7 +10,9 @@ export default async function AppointmentPage() {
     });
     return res.json();
   };
+  const session = await auth();
   const data = await getData();
+
   return (
     <div className='m-2'>
       <div className='text-center font-black'>

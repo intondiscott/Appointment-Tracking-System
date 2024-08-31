@@ -7,9 +7,14 @@ import { redirect } from "next/navigation";
 import { hash } from "bcryptjs";
 import { CredentialsSignin } from "next-auth";
 import { signIn, signOut } from "@/auth";
+import path from "path";
 
-const providerSignin = async () => {
+const GitHubSignin = async () => {
   await signIn("github", { callbackUrl: "/" });
+};
+
+const GoogleSignin = async () => {
+  await signIn("google", { redirect: true, callbackUrl: "/" });
 };
 
 const LogOut = async () => {
@@ -19,7 +24,7 @@ const LogOut = async () => {
 const login = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const firstName = formData.get("firstName");
+  const name = formData.get("name");
 
   try {
     await signIn("credentials", {
@@ -39,6 +44,7 @@ const Register = async (formData: FormData) => {
   const firstName = formData.get("firstName") as string;
   const lastName = formData.get("lastName") as string;
   const email = formData.get("email") as string;
+  const image = formData.get("image") as string;
   const password = formData.get("password") as string;
   console.log(firstName);
   console.log(lastName);
@@ -54,9 +60,14 @@ const Register = async (formData: FormData) => {
 
   const hashPassword = await hash(password, 12);
 
-  await User.create({ firstName, lastName, email, password: hashPassword });
+  await User.create({
+    name: firstName + " " + lastName,
+    email,
+    image,
+    password: hashPassword,
+  });
   console.log("user created");
   redirect("/Login");
 };
 
-export { Register, login, providerSignin, LogOut };
+export { Register, login, GoogleSignin, GitHubSignin, LogOut };

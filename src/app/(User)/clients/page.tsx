@@ -1,3 +1,5 @@
+import { checkSession } from "@/app/(Auth)/checkSession";
+import { auth } from "@/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { CircleUserRound } from "lucide-react";
 import Image from "next/image";
@@ -9,37 +11,41 @@ export default async function Clients() {
     return res.json();
   };
   const data = await getData();
+  const session = await auth();
+  console.log(session);
   return (
-    <div className='m-2'>
-      <div className='text-center font-black'>
-        <strong>Clients</strong>
+    (await checkSession) && (
+      <div className='m-2'>
+        <div className='text-center font-black'>
+          <strong>Clients</strong>
+        </div>
+
+        {data.map((res: any, idx: number) =>
+          res.accounts.map((items: any) => (
+            <Card
+              key={idx}
+              className='bg-gray-700 text-white _cards ml-10 mr-10 mt-2'
+            >
+              <CardContent className='flex flex-col p-6'>
+                {items.picture == "" ? (
+                  <CircleUserRound className='w-20 h-20 ml-auto' />
+                ) : (
+                  <Image
+                    className='rounded-full w-20 h-20 ml-auto'
+                    src={`/assets/${items.picture}`}
+                    alt='alt'
+                    width={300}
+                    height={200}
+                  />
+                )}
+
+                <span>ID: {items.id}</span>
+                <span>Name: {items.name}</span>
+              </CardContent>
+            </Card>
+          ))
+        )}
       </div>
-
-      {data.map((res: any, idx: number) =>
-        res.accounts.map((items: any) => (
-          <Card
-            key={idx}
-            className='bg-gray-700 text-white _cards ml-10 mr-10 mt-2'
-          >
-            <CardContent className='flex flex-col p-6'>
-              {items.picture == "" ? (
-                <CircleUserRound className='w-20 h-20 ml-auto' />
-              ) : (
-                <Image
-                  className='rounded-full w-20 h-20 ml-auto'
-                  src={`/assets/${items.picture}`}
-                  alt='alt'
-                  width={300}
-                  height={200}
-                />
-              )}
-
-              <span>ID: {items.id}</span>
-              <span>Name: {items.name}</span>
-            </CardContent>
-          </Card>
-        ))
-      )}
-    </div>
+    )
   );
 }
