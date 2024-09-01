@@ -1,8 +1,11 @@
 import { NextRequest } from "next/server";
+import connectMongoDB from "@/app/Database/connectDB";
+import User from "@/app/Models/users";
+import Client from "../../Models/clients";
 
-export function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
   //const res = fetch("http://localhost:3000/api");
-  const user = [
+  /*const user = [
     {
       accounts: [
         {
@@ -42,7 +45,9 @@ export function GET(req: NextRequest) {
         },
       ],
     },
-  ];
+  ];*/
+  await connectMongoDB();
+  const user = await Client.find({});
 
   return Response.json(user);
 }

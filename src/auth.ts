@@ -1,14 +1,14 @@
+import User from "@/app/Models/users";
 import NextAuth, { CredentialsSignin } from "next-auth";
 
 import Credentials from "next-auth/providers/credentials";
-import connectMongoDB from "./app/Database/connectDB";
-import User from "./app/Models/users";
+
 import { compare } from "bcryptjs";
 import GitHub from "next-auth/providers/github";
 import { redirect } from "next/navigation";
 import Google from "next-auth/providers/google";
-import { login } from "@/app/action/user";
-import async from "./app/page";
+
+import connectMongoDB from "@/app/Database/connectDB";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
@@ -16,17 +16,38 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async session({ session, token }) {
-      if (token?.sub) {
+      if (token.sub) {
         await connectMongoDB();
-        console.log("USER: " + session.user.name);
+
         const email = session.user.email as string;
         const findUser = await User.findOne({ email });
-        const name = "";
-
+        session.sessionToken = token.sub;
         session.user.name = findUser["name"];
         session.user.image = findUser["image"];
       }
       return session;
+    },
+    async jwt({ token, user, account, session }) {
+      if (account?.provider == "credentials") {
+        token = { ...user, ...session };
+      }
+      if (account?.provider == "google") {
+        token = { ...user };
+      }
+      return token;
+    },
+    signIn: async ({ user, account }) => {
+      if (account?.provider === "credentials") return true;
+      if (account?.provider === "google") {
+        try {
+          const { email, name, image } = user;
+          await connectMongoDB();
+          const existingUser = await User.findOne({ email });
+          if (!existingUser)
+            await User.create({ email, name, image, providerId: "google" });
+          else return true;
+        } catch (error) {}
+      } else return false;
     },
   },
   providers: [

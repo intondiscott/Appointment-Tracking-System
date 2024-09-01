@@ -35,6 +35,7 @@ const login = async (formData: FormData) => {
     });
   } catch (error) {
     const caughtError = error as CredentialsSignin;
+
     return caughtError.cause;
   }
   redirect("/");

@@ -31,7 +31,7 @@ export function GET() {
       name: "Clients",
       subItems: [
         { name: "Client List", path: "clients" },
-        { name: "Add New Client", path: "kkkk" },
+        { name: "Add New Client", path: "/AddClient" },
         { name: "Client History", path: "kkkk" },
       ],
     },

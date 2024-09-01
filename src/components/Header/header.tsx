@@ -22,6 +22,8 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { LogOut } from "@/app/action/user";
+import { getSession } from "@/lib/getSession";
+import User from "@/app/Models/users";
 type SubItem = {
   name: string;
   path?: string;
@@ -40,7 +42,9 @@ const Header = async () => {
     const data = await res.json();
   };
 
-  const session = await auth();
+  const session = await getSession();
+  const email = session?.user?.email as string;
+  const user = await User.findOne({ email });
   const res = await fetch("http://localhost:3000/api/UI_Template");
   const data = await res.json();
   return (
@@ -97,7 +101,11 @@ const Header = async () => {
                 >
                   <Image
                     className='rounded-full'
-                    src={`/assets/${session.user?.image!}`}
+                    src={
+                      user.providerId === "google"
+                        ? user.image
+                        : `/assets/${user.image}`
+                    }
                     alt='alt'
                     width={60}
                     height={60}

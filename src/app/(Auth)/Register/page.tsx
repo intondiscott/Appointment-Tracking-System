@@ -58,7 +58,7 @@ export default function SignUp() {
   }
 
   return (
-    <Card className='max-w-sm p-6 bg-slate-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+    <Card className='m-auto mt-24 w-[30%] p-6 bg-slate-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
       <Form {...form}>
         <form
           //onSubmit={form.handleSubmit(onSubmit)}
@@ -137,7 +137,9 @@ export default function SignUp() {
               </FormItem>
             )}
           />
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' className='w-full'>
+            Register
+          </Button>
         </form>
       </Form>
     </Card>
