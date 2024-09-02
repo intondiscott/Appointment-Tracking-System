@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { GoogleSignin, login, GitHubSignin, CC } from "@/app/action/user";
+import { GoogleSignin, login, GitHubSignin } from "@/app/action/user";
 
 import { redirect } from "next/navigation";
 

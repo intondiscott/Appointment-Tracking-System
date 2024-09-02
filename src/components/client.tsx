@@ -1,29 +1,30 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CircleUserRound } from "lucide-react";
 import Image from "next/image";
-import { getSession } from "../../../lib/getSession";
+
 import { redirect } from "next/navigation";
 import { cache } from "react";
-export default async function AppointmentPage() {
+import Link from "next/link";
+import { getSession } from "@/lib/getSession";
+export default async function Clients(props: any) {
   const getData = async () => {
-    const res = await fetch("http://localhost:3000/api/accounts/", {
+    const res = await fetch("http://localhost:3000/api/accounts/" + props.id, {
       next: { revalidate: 0 },
     });
     return res.json();
   };
   const session = await getSession();
-  const data = await getData();
-  console.log("Data: " + session);
+  const data =
+    (await getData()).length > 1 ? await getData() : [await getData()];
+
   if (!session) redirect("/");
   return (
     <div className='m-2'>
-      <div className='text-center font-black'>
-        <strong>Clients</strong>
-      </div>
+      <div className='text-center font-black'></div>
 
       {data.map(
         (res: any, idx: number) =>
-          !res.appointment && (
+          res && (
             <Card
               key={idx}
               className='bg-gray-700 text-white _cards ml-10 mr-10 mt-2'
@@ -41,7 +42,7 @@ export default async function AppointmentPage() {
                     height={200}
                   />*/
                 )}
-
+                <span>id : {res._id}</span>
                 <span>
                   Name : {res.firstName} {res.lastName}
                 </span>

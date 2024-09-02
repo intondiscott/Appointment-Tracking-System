@@ -17,13 +17,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
 
-import async from "../../page";
 import connectMongoDB from "@/app/Database/connectDB";
 import User from "@/app/Models/users";
 import { Card } from "@/components/ui/card";
-import { AddClientDetails } from "@/app/action/client";
+import { AddClientDetails, EditClientDetails } from "@/app/action/client";
+import Client from "@/app/Models/clients";
 
-export default function AddClient() {
+export default function ClientForm(props: any) {
   // ...
 
   const formSchema = z.object({
@@ -42,20 +42,17 @@ export default function AddClient() {
     bill: z.string().min(2, "Email is required"),
     paidDate: z.string().min(2, "Email is required"),
   });
+
+  const formStuff = async () => {
+    const res = await fetch("http://localhost:3000/api/accounts/" + props.id);
+    const data = await res.json();
+    return { ...data };
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      street: "",
-      town: "",
-      state: "",
-      zip: "",
-      phoneNumber: "",
-      email: "",
-      bill: "",
-      paidDate: "",
-    },
+
+    defaultValues: async () => formStuff(),
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.connectDB
@@ -70,7 +67,7 @@ export default function AddClient() {
       <Form {...form}>
         <form
           //onSubmit={form.handleSubmit(onSubmit)}
-          action={AddClientDetails}
+          action={EditClientDetails}
           className='space-y-8'
         >
           <div className='ml-10 mr-10 flex justify-between'>
@@ -224,7 +221,7 @@ export default function AddClient() {
             />
           </div>
           <Button type='submit' className='w-full'>
-            Add New Client
+            Update Client
           </Button>
         </form>
       </Form>

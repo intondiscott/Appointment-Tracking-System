@@ -15,40 +15,41 @@ export function GET() {
     {
       name: "Home",
       subItems: [
-        { name: "Dashboard", path: "Admindashboard" },
-        { name: "Notifications", path: "yes" },
+        { name: "Home Page", path: "/" },
+        { name: "Dashboard", path: "/Admindashboard" },
+        { name: "Notifications", path: "/yes" },
       ],
     },
     {
       name: "Appointments",
       subItems: [
-        { name: "Schedule", path: "yrd" },
-        { name: "My Appointments", path: "appointment" },
-        { name: "Calendar", path: "lkllk" },
+        { name: "Schedule", path: "/yrd" },
+        { name: "My Appointments", path: "/appointment" },
+        { name: "Calendar", path: "/lkllk" },
       ],
     },
     {
       name: "Clients",
       subItems: [
-        { name: "Client List", path: "clients" },
+        { name: "Client List", path: "/clients" },
         { name: "Add New Client", path: "/AddClient" },
-        { name: "Client History", path: "kkkk" },
+        { name: "Client History", path: "/kkkk" },
       ],
     },
     {
       name: "Services",
       subItems: [
-        { name: "Service List", path: "kkkk" },
-        { name: "Add New Service", path: "hgffgfg" },
-        { name: "Pricing", path: "jkjjj" },
+        { name: "Service List", path: "/kkkk" },
+        { name: "Add New Service", path: "/hgffgfg" },
+        { name: "Pricing", path: "/jkjjj" },
       ],
     },
     {
       name: "Billing",
       subItems: [
-        { name: "Invoices", path: "klkklk" },
-        { name: "Payments", path: "hhhhh" },
-        { name: "Billing Settings", path: "" },
+        { name: "Invoices", path: "/klkklk" },
+        { name: "Payments", path: "/hhhhh" },
+        { name: "Billing Settings", path: "/" },
       ],
     },
     // {
@@ -70,9 +71,9 @@ export function GET() {
     {
       name: "Help",
       subItems: [
-        { name: "Documentation", path: "" },
-        { name: "Support", path: "" },
-        { name: "FAQ", path: "" },
+        { name: "Documentation", path: "/" },
+        { name: "Support", path: "/" },
+        { name: "FAQ", path: "/" },
       ],
     },
   ];
