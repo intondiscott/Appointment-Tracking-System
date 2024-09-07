@@ -116,7 +116,10 @@ const Header = async () => {
               <DropdownMenuContent align='end'>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <Link href={"/settings"}>
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                </Link>
+
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <form action={LogOut}>
