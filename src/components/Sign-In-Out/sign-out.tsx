@@ -1,3 +1,5 @@
+import { signOut } from "@/auth";
+
 export function SignOut() {
   return (
     <form
