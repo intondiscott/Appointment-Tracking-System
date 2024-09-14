@@ -42,7 +42,7 @@ export default async function Clients(props: any) {
                     height={200}
                   />*/
                 )}
-
+                <span>id : {res._id}</span>
                 <span>
                   Name : {res.firstName} {res.lastName}
                 </span>

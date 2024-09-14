@@ -17,7 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
 import { Register } from "@/app/action/user";
-
+import async from "../../page";
+import connectMongoDB from "@/app/Database/connectDB";
+import User from "@/app/Models/users";
 import { Card } from "@/components/ui/card";
 
 export default function SignUp() {
@@ -113,7 +115,6 @@ export default function SignUp() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Image string</FormLabel>
-
                 <FormControl>
                   <Input placeholder='image' type='text' {...field} />
                 </FormControl>

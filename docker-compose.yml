@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    environment:
+      - DB_HOST=mongo
+      - DB_NAME=bespoke-db
+    links:
+      - mongo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    container_name: bespoke-app
+  mongo:
+    image: 'mongo:4'
+    container_name: bespoke-db
+    ports:
+      - '27017:27017'

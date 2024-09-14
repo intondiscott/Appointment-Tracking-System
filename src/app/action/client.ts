@@ -17,10 +17,7 @@ const EditClientDetails = async (formData: FormData) => {
   console.log(firstName);
   console.log(lastName);
   console.log(email);
-  await connectMongoDB();
-  const foundClient = await Client.findOne({ email });
-  console.log(foundClient);
-  await Client.findByIdAndUpdate(foundClient["_id"], {
+  await Client.updateOne({
     firstName,
     lastName,
     street,
@@ -29,7 +26,7 @@ const EditClientDetails = async (formData: FormData) => {
     zip,
     phoneNumber,
     email,
-
+    created: new Date(),
     bill,
     paidDate,
   });

@@ -12,9 +12,9 @@ const AllClients = async () => {
     return res.json();
   };
   const data = await getData();
-  const clients = data.map((i: any) => (
-    <Link key={i["_id"]} href={`/clients/${i["_id"]}`}>
-      <Clients key={i["_id"]} id={i["_id"]} />
+  const clients = data.map((i: any, idx: number) => (
+    <Link key={idx} href={`/clients/${i["_id"]}`}>
+      <Clients key={idx} id={i["_id"]} />
     </Link>
   ));
 
