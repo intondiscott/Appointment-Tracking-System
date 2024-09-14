@@ -24,6 +24,7 @@ import Image from "next/image";
 import { LogOut } from "@/app/action/user";
 import { getSession } from "@/lib/getSession";
 import User from "@/app/Models/users";
+import { ThemeProvider } from "../theme-provider";
 type SubItem = {
   name: string;
   path?: string;
@@ -50,21 +51,21 @@ const Header = async () => {
   return (
     <>
       {session ? (
-        <header className='bg-gray-800 p-1 text-white sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6'>
-          <nav className='flex justify-start p-1'>
-            <Menubar className='bg-gray-800 text-white p-1'>
+        <header className="bg-gray-800 p-1 text-white sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+          <nav className="flex justify-start p-1">
+            <Menubar className="bg-gray-800 text-white p-1">
               {data.map((headerItem: any, index: number) => (
                 <MenubarMenu key={index}>
-                  <MenubarTrigger className='px-4 py-2 hover:bg-gray-700'>
+                  <MenubarTrigger className="px-4 py-2 hover:bg-gray-700">
                     {headerItem.name}
                   </MenubarTrigger>
                   {headerItem.subItems && (
-                    <MenubarContent className='bg-gray-800 text-white'>
+                    <MenubarContent className="bg-gray-800 text-white">
                       {headerItem.subItems.map(
                         (subItem: any, subIndex: number) => (
                           <MenubarItem
                             key={subIndex}
-                            className='hover:bg-gray-700 px-4 py-2'
+                            className="hover:bg-gray-700 px-4 py-2"
                           >
                             {subItem.path ? (
                               <Link href={subItem.path}>{subItem.name}</Link>
@@ -81,46 +82,48 @@ const Header = async () => {
             </Menubar>
           </nav>
 
-          <div className='flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4'>
-            <form className='ml-auto flex-1 sm:flex-initial'>
-              <div className='relative'>
-                <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
+          <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+            <form className="ml-auto flex-1 sm:flex-initial">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
-                  type='search'
-                  placeholder='Search products...'
-                  className='pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]'
+                  type="search"
+                  placeholder="Search products..."
+                  className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
                 />
               </div>
             </form>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
-                  variant='secondary'
-                  size='icon'
-                  className='rounded-full'
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full"
                 >
                   <Image
-                    className='rounded-full'
+                    className="rounded-full"
                     src={
                       user.providerId === "google"
                         ? user.image
                         : `/assets/${user.image}`
                     }
-                    alt='alt'
+                    alt="alt"
                     width={60}
                     height={60}
                   />
-                  <span className='sr-only'>Toggle user menu</span>
+                  <span className="sr-only">Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align='end'>
+              <DropdownMenuContent align="end">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/Settings">Settings</Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <form action={LogOut}>
-                    <button type='submit'>Logout</button>
+                    <button type="submit">Logout</button>
                   </form>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -130,22 +133,22 @@ const Header = async () => {
           </div>
         </header>
       ) : (
-        <header className='bg-gray-800 text-white sticky top-0 flex items-center justify-between px-4 py-5'>
-          <nav className='flex justify-between w-full'>
-            <ul className='flex space-x-8'>
+        <header className="bg-gray-800 text-white sticky top-0 flex items-center justify-between px-4 py-5">
+          <nav className="flex justify-between w-full">
+            <ul className="flex space-x-8">
               <li>
-                <Link href='/'>Home</Link>
+                <Link href="/">Home</Link>
               </li>
               <li>
-                <Link href='/about'>About</Link>
+                <Link href="/about">About</Link>
               </li>
               <li>
-                <Link href='/solution'>Solution</Link>
+                <Link href="/solution">Solution</Link>
               </li>
             </ul>
-            <ul className='flex space-x-8'>
+            <ul className="flex space-x-8">
               <li>
-                <Link href='/Login'> Login </Link>
+                <Link href="/Login"> Login </Link>
               </li>
             </ul>
           </nav>
