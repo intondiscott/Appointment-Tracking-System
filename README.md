@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
   Install dockercli, and docker desktop https://www.docker.com/products/docker-desktop/
  - Terminal command: 
 ~~~bash
+docker create link
 docker build -t bespoke-app 
 docker compose up 
 ~~~
