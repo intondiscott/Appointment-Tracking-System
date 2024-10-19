@@ -1,6 +1,16 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
+## What the Project Looks Like So Far
+
+![alt text](public/assets/example1.png)
+![alt text](public/assets/example2.png)
+![alt text](public/assets/example3.png)
+![alt text](public/assets/example4.png)
+![alt text](public/assets/example5.png)
+![alt text](public/assets/example6.png)
+
 ## Set up Environment Variables
+
 ```text
 1.) put .env.local file in the root of project
 2.) populate .env.local file with secret keys
