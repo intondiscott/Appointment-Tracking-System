@@ -1,11 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { CircleUserRound } from "lucide-react";
+import {
+  CircleUserRound,
+  UserRound,
+  Map,
+  Phone,
+  Mail,
+  Receipt,
+  CalendarDaysIcon,
+  BookUserIcon,
+} from "lucide-react";
 import Image from "next/image";
 
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import Link from "next/link";
 import { getSession } from "@/lib/getSession";
+import { IconLeft } from "react-day-picker";
 export default async function Clients(props: any) {
   const getData = async () => {
     const res = await fetch("http://localhost:3000/api/accounts/" + props.id, {
@@ -19,19 +29,19 @@ export default async function Clients(props: any) {
 
   if (!session) redirect("/");
   return (
-    <div className='m-2'>
-      <div className='text-center font-black'></div>
+    <div className="m-2">
+      <div className="text-center font-black"></div>
 
       {data.map(
         (res: any, idx: number) =>
           res && (
             <Card
               key={idx}
-              className='bg-gray-700 text-white _cards ml-10 mr-10 mt-2'
+              className="bg-gray-700 text-white _cards ml-10 mr-10 mt-2"
             >
-              <CardContent className='flex flex-col p-6  '>
+              <CardContent className="flex flex-col p-6  ">
                 {res.picture == null ? (
-                  <CircleUserRound className='w-20 h-20 ml-auto' />
+                  <CircleUserRound className="w-20 h-20 ml-auto" />
                 ) : (
                   ""
                   /*<Image
@@ -42,17 +52,28 @@ export default async function Clients(props: any) {
                     height={200}
                   />*/
                 )}
-                <span>id : {res._id}</span>
-                <span>
-                  Name : {res.firstName} {res.lastName}
+                <span className="flex">
+                  <BookUserIcon className="mr-2" /> {res.accID}
                 </span>
-                <span>Phone Number : {res.phoneNumber}</span>
-                <span>
-                  Address : {res.street} {res.town}, {res.state} {res.zip}
+                <span className="flex">
+                  <UserRound className="mr-2" /> {res.firstName} {res.lastName}
                 </span>
-                <span>Email : {res.email}</span>
-                <span>Bill : ${res.bill}</span>
-                <span>Bill Paid On : {res.paidDate}</span>
+                <span className="flex">
+                  <Phone className="mr-2" /> {res.phoneNumber}
+                </span>
+                <span className="flex">
+                  <Map className="mr-2" /> {res.street} {res.town}, {res.state}{" "}
+                  {res.zip}
+                </span>
+                <span className="flex">
+                  <Mail className="mr-2" /> {res.email}
+                </span>
+                <span className="flex">
+                  <Receipt className="mr-2" />${res.bill}
+                </span>
+                <span className="flex">
+                  <CalendarDaysIcon className="mr-2" /> {res.paidDate}
+                </span>
               </CardContent>
             </Card>
           )

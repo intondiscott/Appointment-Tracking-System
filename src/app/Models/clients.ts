@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const clientSchema = new Schema({
+  accID: String,
   firstName: String,
   lastName: String,
   street: String,
