@@ -1,5 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
+## Set up Environment Variables
+```text
+1.) put .env.local file in the root of project
+2.) populate .env.local file with secret keys
+AUTH_SECRET=your secret
+MONGO_URI=your secret
+AUTH_GITHUB_ID=your secret
+AUTH_GITHUB_SECRET=your secret
+AUTH_GOOGLE_ID=your secret
+AUTH_GOOGLE_SECRET=your secret
+3.) That's it!
+```
+
 ## Easiest Start with Docker
 
 Install dockercli, and docker desktop https://www.docker.com/products/docker-desktop/
