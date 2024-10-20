@@ -33,3 +33,7 @@ Install dockercli, and docker desktop https://www.docker.com/products/docker-des
 docker network create .
 docker compose up
 ```
+
+## The Docker Container Should Look Like This 🐳
+
+![alt text](public/assets/example7.png)

@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Compiler Explorer
+Exec=/opt/brave.com/brave/brave-browser --profile-directory=Default --ignore-profile-directory-if-not-exists https://godbolt.org/
+Icon=/home/scotty/.config/BraveSoftware/Brave-Browser/Default/Web Shortcut Icons/shortcut-2bddf770549a310d024110de0a89f39f.png
+URL=https://godbolt.org/
+Comment=Open https://godbolt.org/ in a new tab in Brave.

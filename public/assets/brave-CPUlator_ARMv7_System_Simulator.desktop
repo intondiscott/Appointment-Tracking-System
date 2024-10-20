@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CPUlator ARMv7 System Simulator
+Exec=/opt/brave.com/brave/brave-browser --profile-directory=Default --ignore-profile-directory-if-not-exists "https://cpulator.01xz.net/?sys=arm-de1soc"
+Icon=/home/scotty/.config/BraveSoftware/Brave-Browser/Default/Web Shortcut Icons/shortcut-4bcfe0cb8d027596e0cb653761fb626a.png
+URL=https://cpulator.01xz.net/?sys=arm-de1soc
+Comment=Open https://cpulator.01xz.net/?sys=arm-de1soc in a new tab in Brave.
