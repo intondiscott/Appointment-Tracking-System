@@ -31,6 +31,5 @@ Install dockercli, and docker desktop https://www.docker.com/products/docker-des
 
 ```bash
 docker network create .
-docker build -t bespoke-app .
 docker compose up
 ```
