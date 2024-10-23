@@ -1,7 +1,7 @@
 "use server";
 import { redirect } from "next/navigation";
 import connectMongoDB from "../Database/connectDB";
-import Client from "../Models/clients";
+import { Client } from "../Models/clients";
 
 const DeleteClientDetails = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
@@ -44,6 +44,10 @@ const EditClientDetails = async (formData: FormData) => {
   );
   console.log("client updated");
   redirect("/clients");
+};
+
+const AddClientService = async (formData: FormData) => {
+  const accID = formData.get("accID") as string;
 };
 
 const AddClientDetails = async (formData: FormData) => {

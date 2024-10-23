@@ -15,6 +15,15 @@ const clientSchema = new Schema({
   paidDate: String,
 });
 
+const clientServiceSchema = new Schema({
+  accID: String,
+  TypeOfService: String,
+});
+
 const Client =
   mongoose.models?.Client || mongoose.model("Client", clientSchema);
-export default Client;
+
+const ClientService =
+  mongoose.models?.ClientService ||
+  mongoose.model("ClientService", clientServiceSchema);
+export { Client, ClientService };

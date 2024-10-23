@@ -25,8 +25,9 @@ import {
   DeleteClientDetails,
   EditClientDetails,
 } from "@/app/action/client";
-import Client from "@/app/Models/clients";
+import { Client } from "@/app/Models/clients";
 import { Trash2 } from "lucide-react";
+import Link from "next/link";
 
 export default function ClientForm(props: any) {
   // ...
@@ -315,6 +316,9 @@ export default function ClientForm(props: any) {
             Update Client
           </Button>
         </form>
+        <Button className="flex w-full text-2xl font-black">
+          <Link href={"/AddClientService"}>Add Service</Link>
+        </Button>
       </Form>
     </Card>
   );

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import client from "../../../../lib/db";
-import Client from "@/app/Models/clients";
+import { Client } from "@/app/Models/clients";
 
 export async function GET(
   req: NextRequest,

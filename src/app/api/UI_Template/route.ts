@@ -24,7 +24,7 @@ export function GET() {
       name: "Appointments",
       subItems: [
         { name: "Schedule", path: "/yrd" },
-        { name: "My Appointments", path: "/appointment" },
+        { name: "My Appointments", path: "/clients/ShowAllAppointments" },
         { name: "Calendar", path: "/lkllk" },
       ],
     },
@@ -39,7 +39,7 @@ export function GET() {
     {
       name: "Services",
       subItems: [
-        { name: "Service List", path: "/kkkk" },
+        { name: "Service List", path: "/clients/ShowClientServices" },
         { name: "Add New Service", path: "/hgffgfg" },
         { name: "Pricing", path: "/jkjjj" },
       ],
