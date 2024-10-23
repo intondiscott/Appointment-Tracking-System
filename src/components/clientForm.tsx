@@ -22,6 +22,7 @@ import User from "@/app/Models/users";
 import { Card } from "@/components/ui/card";
 import {
   AddClientDetails,
+  AddClientServiceForm,
   DeleteClientDetails,
   EditClientDetails,
 } from "@/app/action/client";
@@ -316,9 +317,25 @@ export default function ClientForm(props: any) {
             Update Client
           </Button>
         </form>
-        <Button className="flex w-full text-2xl font-black">
-          <Link href={"/AddClientService"}>Add Service</Link>
-        </Button>
+        <form action={AddClientServiceForm}>
+          <FormField
+            control={form.control}
+            name="accID"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    className="invisible"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button className="flex w-full text-2xl font-black">
+            Add Service
+          </Button>
+        </form>
       </Form>
     </Card>
   );

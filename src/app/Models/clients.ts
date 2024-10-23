@@ -17,7 +17,7 @@ const clientSchema = new Schema({
 
 const clientServiceSchema = new Schema({
   accID: String,
-  TypeOfService: String,
+  typeOfService: String,
 });
 
 const Client =

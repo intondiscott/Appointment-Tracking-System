@@ -1,7 +1,7 @@
 "use server";
 import { redirect } from "next/navigation";
 import connectMongoDB from "../Database/connectDB";
-import { Client } from "../Models/clients";
+import { Client, ClientService } from "../Models/clients";
 
 const DeleteClientDetails = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
@@ -46,8 +46,23 @@ const EditClientDetails = async (formData: FormData) => {
   redirect("/clients");
 };
 
-const AddClientService = async (formData: FormData) => {
+const AddClientServiceForm = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
+  await connectMongoDB();
+  const foundClient = await Client.findOne({ accID });
+  const id = foundClient["_id"];
+
+  redirect(`${id}/AddClientService`);
+};
+
+const AddClientServiceDetails = async (formData: FormData) => {
+  const accID = formData.get("accID") as string;
+  const TypeOfService = formData.get("typeOfService");
+  console.log(accID);
+  await connectMongoDB();
+
+  ClientService.create({ accID, TypeOfService });
+  redirect(`/clients`);
 };
 
 const AddClientDetails = async (formData: FormData) => {
@@ -102,4 +117,10 @@ const AddClientDetails = async (formData: FormData) => {
   console.log("client created");
   redirect("/clients");
 };
-export { AddClientDetails, EditClientDetails, DeleteClientDetails };
+export {
+  AddClientServiceDetails,
+  AddClientServiceForm,
+  AddClientDetails,
+  EditClientDetails,
+  DeleteClientDetails,
+};
