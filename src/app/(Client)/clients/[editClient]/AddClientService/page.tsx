@@ -44,7 +44,13 @@ export default function ClientServiceForm(props: any) {
   });
 
   const formStuff = async () => {
-    const res = await fetch("http://localhost:3000/api/accounts/" + props.id);
+    const res = await fetch(
+      "http://localhost:3000/api/accounts/client-services/" +
+        props.params["editClient"],
+      {
+        next: { revalidate: 0 },
+      }
+    );
     const data = await res.json();
     return { ...data };
   };
@@ -54,13 +60,6 @@ export default function ClientServiceForm(props: any) {
 
     defaultValues: async () => formStuff(),
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.connectDB
-    // ✅ This will be type-safe and validated.
-    console.log(values.typeOfService);
-    const { typeOfService } = values;
-    console.log(typeOfService);
-  }
 
   return (
     <Card className="m-auto mt-24 w-[60%] p-6 pt-0 bg-slate-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

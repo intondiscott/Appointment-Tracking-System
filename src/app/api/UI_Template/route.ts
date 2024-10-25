@@ -39,7 +39,7 @@ export function GET() {
     {
       name: "Services",
       subItems: [
-        { name: "Service List", path: "/clients/ShowClientServices" },
+        { name: "Service List", path: "/ShowClientServices" },
         { name: "Add New Service", path: "/hgffgfg" },
         { name: "Pricing", path: "/jkjjj" },
       ],

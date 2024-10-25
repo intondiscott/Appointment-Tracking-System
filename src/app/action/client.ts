@@ -50,18 +50,21 @@ const AddClientServiceForm = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
   await connectMongoDB();
   const foundClient = await Client.findOne({ accID });
-  const id = foundClient["_id"];
+  const id = foundClient["accID"];
 
   redirect(`${id}/AddClientService`);
 };
 
 const AddClientServiceDetails = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
-  const TypeOfService = formData.get("typeOfService");
+  const typeOfService = formData.get("typeOfService");
   console.log(accID);
   await connectMongoDB();
-
-  ClientService.create({ accID, TypeOfService });
+  const serviceFound = await ClientService.find({ accID });
+  console.log("Finding: " + serviceFound[0]);
+  if (serviceFound[0] == undefined)
+    await ClientService.create({ accID, typeOfService });
+  else await ClientService.findOneAndUpdate({ accID }, { typeOfService });
   redirect(`/clients`);
 };
 
