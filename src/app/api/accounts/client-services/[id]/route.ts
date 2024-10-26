@@ -14,7 +14,7 @@ export async function GET(
   const returnedData = await data.json();
   let clientFound = { clientError: "Client doesn't exist" };
   returnedData.map((client: any) => {
-    if (client["accID"] === id) clientFound = client;
+    if (client["_id"] === id) clientFound = client;
   });
 
   return NextResponse.json(clientFound);

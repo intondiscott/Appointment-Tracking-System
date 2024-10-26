@@ -20,11 +20,11 @@ const AllClients = async () => {
   const clients = data.map((i: any, idx: number) => (
     <Link
       key={i["_id"]}
-      href={`/clients/${i["_id"]}`}
+      href={`/ShowClientServices/${i["_id"]}`}
     >
       <Services
         key={i["_id"]}
-        id={i["accID"]}
+        id={i["_id"]}
       />
     </Link>
   ));
@@ -32,7 +32,7 @@ const AllClients = async () => {
   return (
     <div>
       <h1 className="text-center text-3xl font-black">
-        <strong>Clients</strong>
+        <strong>Client Services</strong>
       </h1>
 
       {clients}

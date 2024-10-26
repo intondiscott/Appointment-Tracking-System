@@ -24,9 +24,7 @@ import {
   AddClientDetails,
   AddClientServiceDetails,
   DeleteClientDetails,
-  DeleteService,
   EditClientDetails,
-  EditClientServiceDetails,
 } from "@/app/action/client";
 import { Client } from "@/app/Models/clients";
 import { Trash2 } from "lucide-react";
@@ -73,7 +71,7 @@ export default function ClientServiceForm(props: any) {
 
   const formStuff = async () => {
     const res = await fetch(
-      "http://localhost:3000/api/accounts/client-services/" + props.id,
+      "http://localhost:3000/api/accounts/client-services/",
       {
         next: { revalidate: 0 },
       }
@@ -89,36 +87,11 @@ export default function ClientServiceForm(props: any) {
   });
 
   return (
-    <Card className="m-auto mt-24 w-[60%] p-6 pt-0 bg-slate-200 border rounded-lg  dark:bg-gray-800 border-black shadow-lg shadow-black">
+    <Card className="m-auto mt-24 w-[60%] p-6 pt-0 bg-slate-200 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 shadow-lg shadow-black">
       <Form {...form}>
         <form
-          className="flex place-self-end mt-2"
-          action={DeleteService}
-        >
-          <FormField
-            control={form.control}
-            name="accID"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    className="invisible"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button
-            type="submit"
-            className="text-2xl font-black bg-red-600 mr-1"
-          >
-            <Trash2 />
-          </Button>
-        </form>
-        <form
           //onSubmit={form.handleSubmit(onSubmit)}
-          action={EditClientServiceDetails}
+          action={AddClientServiceDetails}
           className="space-y-8"
         >
           <FormField
@@ -326,7 +299,7 @@ export default function ClientServiceForm(props: any) {
             type="submit"
             className="flex w-full text-2xl font-black"
           >
-            Update Service
+            Submit Service
           </Button>
         </form>
       </Form>

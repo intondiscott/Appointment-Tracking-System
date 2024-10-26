@@ -15,20 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { redirect } from "next/navigation";
 
-import connectMongoDB from "@/app/Database/connectDB";
-import User from "@/app/Models/users";
 import { Card } from "@/components/ui/card";
-import {
-  AddClientDetails,
-  AddClientServiceForm,
-  DeleteClientDetails,
-  EditClientDetails,
-} from "@/app/action/client";
-import { Client } from "@/app/Models/clients";
+import { DeleteClientDetails, EditClientDetails } from "@/app/action/client";
+
 import { Trash2 } from "lucide-react";
-import Link from "next/link";
 
 export default function ClientForm(props: any) {
   // ...
@@ -49,8 +40,6 @@ export default function ClientForm(props: any) {
     zip: z.string().min(2, "Email is required"),
     phoneNumber: z.string().min(2, "Email is required"),
     email: z.string().min(2, "Email is required"),
-    bill: z.string().min(2, "Email is required"),
-    paidDate: z.string().min(2, "Email is required"),
   });
 
   const formStuff = async () => {
@@ -64,16 +53,9 @@ export default function ClientForm(props: any) {
 
     defaultValues: async () => formStuff(),
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.connectDB
-    // ✅ This will be type-safe and validated.
-    console.log(values.firstName);
-    const { firstName } = values;
-    console.log(firstName);
-  }
 
   return (
-    <Card className="m-auto mt-24 w-[60%] p-6 pt-0 bg-slate-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <Card className="m-auto mt-24 w-[60%] p-6 pt-0 bg-slate-200  rounded-lg border-black shadow-lg shadow-black">
       <Form {...form}>
         <form
           className="flex place-self-end mt-2"
@@ -185,7 +167,8 @@ export default function ClientForm(props: any) {
                   <FormControl>
                     <Input
                       placeholder="phone number"
-                      type="phone"
+                      type="tel"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       {...field}
                     />
                   </FormControl>
@@ -271,69 +254,12 @@ export default function ClientForm(props: any) {
               )}
             />
           </div>
-          <div className="flex justify-between">
-            <FormField
-              control={form.control}
-              name="bill"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-black">Bill</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="bill"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="paidDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-black">Paid Date</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="street"
-                      type="date"
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
 
           <Button
             type="submit"
             className="flex w-full text-2xl font-black"
           >
             Update Client
-          </Button>
-        </form>
-        <form action={AddClientServiceForm}>
-          <FormField
-            control={form.control}
-            name="accID"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    className="invisible"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button className="flex w-full text-2xl font-black">
-            Add Service
           </Button>
         </form>
       </Form>

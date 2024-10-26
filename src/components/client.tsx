@@ -8,6 +8,7 @@ import {
   Receipt,
   CalendarDaysIcon,
   BookUserIcon,
+  MapPinned,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -62,17 +63,15 @@ export default async function Clients(props: any) {
                   <Phone className="mr-2" /> {res.phoneNumber}
                 </span>
                 <span className="flex">
-                  <Map className="mr-2" /> {res.street} {res.town}, {res.state}{" "}
-                  {res.zip}
+                  <MapPinned className="mr-2" /> {res.street} {res.town},{" "}
+                  {res.state} {res.zip}
                 </span>
                 <span className="flex">
                   <Mail className="mr-2" /> {res.email}
                 </span>
+
                 <span className="flex">
-                  <Receipt className="mr-2" />${res.bill}
-                </span>
-                <span className="flex">
-                  <CalendarDaysIcon className="mr-2" /> {res.paidDate}
+                  <CalendarDaysIcon className="mr-2" /> {res.created}
                 </span>
               </CardContent>
             </Card>

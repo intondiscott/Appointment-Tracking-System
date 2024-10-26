@@ -38,8 +38,6 @@ export default function AddClient() {
     zip: z.string().min(2, "Email is required"),
     phoneNumber: z.string().min(2, "Email is required"),
     email: z.string().min(2, "Email is required"),
-    bill: z.string().min(2, "Email is required"),
-    paidDate: z.string().min(2, "Email is required"),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,20 +51,11 @@ export default function AddClient() {
       zip: "",
       phoneNumber: "",
       email: "",
-      bill: "",
-      paidDate: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.connectDB
-    // ✅ This will be type-safe and validated.
-    console.log(values.firstName);
-    const { firstName } = values;
-    console.log(firstName);
-  }
 
   return (
-    <Card className="m-auto mt-24 w-[60%] p-6 bg-slate-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <Card className="m-auto mt-24 w-[60%] p-6 bg-slate-200 border rounded-lg border-black shadow-lg shadow-black">
       <Form {...form}>
         <form
           //onSubmit={form.handleSubmit(onSubmit)}
@@ -154,7 +143,8 @@ export default function AddClient() {
                   <FormControl>
                     <Input
                       placeholder="phone number"
-                      type="phone"
+                      type="tel"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       {...field}
                     />
                   </FormControl>
@@ -240,44 +230,7 @@ export default function AddClient() {
               )}
             />
           </div>
-          <div className="flex justify-between">
-            <FormField
-              control={form.control}
-              name="bill"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-black">Bill</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="bill"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="paidDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-black">Paid Date</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="street"
-                      type="date"
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
           <Button
             type="submit"
             className="w-full text-2xl font-black"

@@ -11,13 +11,20 @@ const clientSchema = new Schema({
   phoneNumber: String,
   email: String,
   created: Date,
-  bill: String,
-  paidDate: String,
 });
 
 const clientServiceSchema = new Schema({
   accID: String,
-  typeOfService: String,
+  size: String,
+  fuel: String,
+  cooling: String,
+  make: String,
+  model: String,
+  serialNum: String,
+  engineNum: String,
+  engineSerial: String,
+  startUpDate: String,
+  activationCode: String,
 });
 
 const Client =

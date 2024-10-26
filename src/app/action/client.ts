@@ -21,8 +21,7 @@ const EditClientDetails = async (formData: FormData) => {
   const state = formData.get("state") as string;
   const zip = formData.get("zip") as string;
   const phoneNumber = formData.get("phoneNumber") as string;
-  const bill = formData.get("bill") as string;
-  const paidDate = formData.get("paidDate") as string;
+
   console.log(firstName);
   console.log(lastName);
   console.log("formData: ", formData);
@@ -37,35 +36,94 @@ const EditClientDetails = async (formData: FormData) => {
       zip,
       phoneNumber,
       email,
-      //created: new Date(),
-      bill,
-      paidDate,
     }
   );
   console.log("client updated");
   redirect("/clients");
 };
 
-const AddClientServiceForm = async (formData: FormData) => {
+const DeleteService = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
-  await connectMongoDB();
-  const foundClient = await Client.findOne({ accID });
-  const id = foundClient["accID"];
 
-  redirect(`${id}/AddClientService`);
+  await ClientService.findOneAndDelete({ accID });
+  console.log("props", formData);
+  redirect("/ShowClientServices");
 };
 
 const AddClientServiceDetails = async (formData: FormData) => {
   const accID = formData.get("accID") as string;
-  const typeOfService = formData.get("typeOfService");
+  const size = formData.get("size") as string;
+  const fuel = formData.get("fuel") as string;
+  const cooling = formData.get("cooling") as string;
+  const make = formData.get("make") as string;
+  const model = formData.get("model") as string;
+  const serialNum = formData.get("serialNum") as string;
+  const engineNum = formData.get("engineNum") as string;
+  const engineSerial = formData.get("engineSerial") as string;
+  const startUpDate = formData.get("startUpDate") as string;
+  const activationCode = formData.get("activationCode") as string;
   console.log(accID);
   await connectMongoDB();
-  const serviceFound = await ClientService.find({ accID });
-  console.log("Finding: " + serviceFound[0]);
-  if (serviceFound[0] == undefined)
-    await ClientService.create({ accID, typeOfService });
-  else await ClientService.findOneAndUpdate({ accID }, { typeOfService });
-  redirect(`/clients`);
+  const clientFound = await Client.find({ accID });
+  const serviceFound = (await ClientService.find({ accID })) || false;
+  console.log("Finding: " + serviceFound);
+  if (!serviceFound[0] && clientFound[0])
+    await ClientService.create({
+      accID,
+      size,
+      fuel,
+      cooling,
+      make,
+      model,
+      serialNum,
+      engineNum,
+      engineSerial,
+      startUpDate,
+      activationCode,
+    });
+  if (!serviceFound[0] && !clientFound[0])
+    throw new Error(
+      "Please create a client first by going to (clients then add new client)..."
+    );
+  else if (clientFound[0] && serviceFound[0])
+    throw new Error(
+      "service account already exist please go to (Service List) accID: " +
+        serviceFound[0].accID +
+        " to update that user's service..."
+    );
+  redirect(`/ShowClientServices`);
+};
+
+const EditClientServiceDetails = async (formData: FormData) => {
+  const accID = formData.get("accID") as string;
+  const size = formData.get("size") as string;
+  const fuel = formData.get("fuel") as string;
+  const cooling = formData.get("cooling") as string;
+  const make = formData.get("make") as string;
+  const model = formData.get("model") as string;
+  const serialNum = formData.get("serialNum") as string;
+  const engineNum = formData.get("engineNum") as string;
+  const engineSerial = formData.get("engineSerial") as string;
+  const startUpDate = formData.get("startUpDate") as string;
+  const activationCode = formData.get("activationCode") as string;
+
+  await connectMongoDB();
+  await ClientService.findOneAndUpdate(
+    { accID },
+    {
+      size,
+      fuel,
+      cooling,
+      make,
+      model,
+      serialNum,
+      engineNum,
+      engineSerial,
+      startUpDate,
+      activationCode,
+    }
+  );
+  redirect(`/ShowClientServices`);
 };
 
 const AddClientDetails = async (formData: FormData) => {
@@ -78,8 +136,7 @@ const AddClientDetails = async (formData: FormData) => {
   const state = formData.get("state") as string;
   const zip = formData.get("zip") as string;
   const phoneNumber = formData.get("phoneNumber") as string;
-  const bill = formData.get("bill") as string;
-  const paidDate = formData.get("paidDate") as string;
+
   console.log(firstName);
   console.log(lastName);
   console.log(accID);
@@ -93,9 +150,7 @@ const AddClientDetails = async (formData: FormData) => {
     !town ||
     !zip ||
     !phoneNumber ||
-    !state ||
-    !paidDate ||
-    !bill
+    !state
   )
     throw new Error("please fill in all fields.");
 
@@ -114,16 +169,15 @@ const AddClientDetails = async (formData: FormData) => {
     phoneNumber,
     email,
     created: new Date(),
-    bill,
-    paidDate,
   });
   console.log("client created");
   redirect("/clients");
 };
 export {
   AddClientServiceDetails,
-  AddClientServiceForm,
   AddClientDetails,
   EditClientDetails,
+  EditClientServiceDetails,
   DeleteClientDetails,
+  DeleteService,
 };

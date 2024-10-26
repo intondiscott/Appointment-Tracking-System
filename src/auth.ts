@@ -9,12 +9,32 @@ import { redirect } from "next/navigation";
 import Google from "next-auth/providers/google";
 
 import connectMongoDB from "@/app/Database/connectDB";
+export const config = {
+  unstable_allowDynamic: [
+    "/lib/utilities.js", // allows a single file
+    "/node_modules/function-bind/**", // use a glob to allow anything in the function-bind 3rd party module
+  ],
+};
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/Login",
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account?.provider === "credentials") return true;
+      if (account?.provider === "google") {
+        try {
+          const { email, name, image } = user;
+          await connectMongoDB();
+          const existingUser = await User.findOne({ email });
+          if (!existingUser)
+            await User.create({ email, name, image, providerId: "google" });
+          else return true;
+        } catch (error) {}
+      }
+      return true;
+    },
     async session({ session, token }) {
       if (token.sub) {
         await connectMongoDB();
@@ -35,19 +55,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token = { ...user };
       }
       return token;
-    },
-    signIn: async ({ user, account }) => {
-      if (account?.provider === "credentials") return true;
-      if (account?.provider === "google") {
-        try {
-          const { email, name, image } = user;
-          await connectMongoDB();
-          const existingUser = await User.findOne({ email });
-          if (!existingUser)
-            await User.create({ email, name, image, providerId: "google" });
-          else return true;
-        } catch (error) {}
-      } else return false;
     },
   },
   providers: [
