@@ -57,7 +57,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
   },
-  site: process.env.NEXTAUTH_URL,
+
   providers: [
     Google,
     GitHub,
