@@ -9,7 +9,9 @@ const AllClients = async () => {
   const getData = async () => {
     await connectMongoDB();
     const res = await fetch(
-      "http://localhost:3000/api/accounts/client-services",
+      `${
+        process.env.VERCEL_URL || "http://localhost:3000"
+      }/api/accounts/client-services`,
       {
         next: { revalidate: 0 },
       }

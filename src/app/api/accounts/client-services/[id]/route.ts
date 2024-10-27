@@ -6,7 +6,9 @@ export async function GET(
   { params: { id } }: { params: { id: string } }
 ) {
   const data = await fetch(
-    "http://localhost:3000/api/accounts/client-services/",
+    `${
+      process.env.VERCEL_URL || "http://localhost:3000"
+    }/api/accounts/client-services/`,
     {
       cache: "no-store",
     }

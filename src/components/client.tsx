@@ -19,9 +19,14 @@ import { getSession } from "@/lib/getSession";
 import { IconLeft } from "react-day-picker";
 export default async function Clients(props: any) {
   const getData = async () => {
-    const res = await fetch("http://localhost:3000/api/accounts/" + props.id, {
-      next: { revalidate: 0 },
-    });
+    const res = await fetch(
+      `${process.env.VERCEL_URL || "http://localhost:3000/"}api/accounts/${
+        props.id
+      }`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
     return res.json();
   };
   const session = await getSession();

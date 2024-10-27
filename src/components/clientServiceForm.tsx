@@ -73,7 +73,9 @@ export default function ClientServiceForm(props: any) {
 
   const formStuff = async () => {
     const res = await fetch(
-      "http://localhost:3000/api/accounts/client-services/" + props.id,
+      `${
+        process.env.VERCEL_URL || "http://localhost:3000/"
+      }api/accounts/client-services/${props.id}`,
       {
         next: { revalidate: 0 },
       }

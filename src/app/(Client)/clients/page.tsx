@@ -6,9 +6,12 @@ import Link from "next/link";
 const AllClients = async () => {
   const getData = async () => {
     await connectMongoDB();
-    const res = await fetch("http://localhost:3000/api/accounts/", {
-      next: { revalidate: 0 },
-    });
+    const res = await fetch(
+      `${process.env.VERCEL_URL || "http://localhost:3000"}/api/accounts/`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
     return res.json();
   };
   const data = await getData();

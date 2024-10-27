@@ -1,136 +1,149 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
-    Activity,
-    ArrowUpRight,
-    CreditCard,
-    DollarSign,
-    Link,
-    Users,
-} from 'lucide-react';
+  Activity,
+  ArrowUpRight,
+  CreditCard,
+  DollarSign,
+  Link,
+  Users,
+} from "lucide-react";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
-
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
-
-import { Button } from "@/components/ui/button"
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from "@/components/ui/avatar"
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { Badge } from "@/components/ui/badge";
 
 type DashboardData = {
-    revenue: number;
-    subscriptions: number;
-    sales: number;
-    active: number;
+  revenue: number;
+  subscriptions: number;
+  sales: number;
+  active: number;
 };
 
 const AdminDashboard = () => {
-    const [data, setData] = useState<DashboardData>()!;
+  const [data, setData] = useState<DashboardData>()!;
 
-    useEffect(() => {
-        // Fetch data or perform other client-side operations
-        async function fetchData() {
-            // Simulate fetching data
-            const fetchedData: unknown = await new Promise((resolve) =>
-                setTimeout(() => resolve({ revenue: 45231.89, subscriptions: 2350, sales: 12234, active: 573 }), 1000)
-            );
+  useEffect(() => {
+    // Fetch data or perform other client-side operations
+    async function fetchData() {
+      // Simulate fetching data
+      const fetchedData: unknown = await new Promise((resolve) =>
+        setTimeout(
+          () =>
+            resolve({
+              revenue: 45231.89,
+              subscriptions: 2350,
+              sales: 12234,
+              active: 573,
+            }),
+          1000
+        )
+      );
 
-            // Type assertion
-            setData(fetchedData as DashboardData);
-        }
-
-        fetchData();
-    }, [setData]);
-
-    if (!data) {
-        return <div>Loading...</div>;
+      // Type assertion
+      setData(fetchedData as DashboardData);
     }
 
-    return (
-        <>
-            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                        <DollarSign className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">${data.revenue}</div>
-                        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
-                        <Users className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">+{data.subscriptions}</div>
-                        <p className="text-xs text-muted-foreground">+180.1% from last month</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Sales</CardTitle>
-                        <CreditCard className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">+{data.sales}</div>
-                        <p className="text-xs text-muted-foreground">+19% from last month</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-                        <Activity className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">+{data.active}</div>
-                        <p className="text-xs text-muted-foreground">+201 since last hour</p>
-                    </CardContent>
-                </Card>
+    fetchData();
+  }, [setData]);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <>
+      <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">${data.revenue}</div>
+            <p className="text-xs text-muted-foreground">
+              +20.1% from last month
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">+{data.subscriptions}</div>
+            <p className="text-xs text-muted-foreground">
+              +180.1% from last month
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Sales</CardTitle>
+            <CreditCard className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">+{data.sales}</div>
+            <p className="text-xs text-muted-foreground">
+              +19% from last month
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+            <Activity className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">+{data.active}</div>
+            <p className="text-xs text-muted-foreground">
+              +201 since last hour
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+        <Card
+          className="xl:col-span-2"
+          x-chunk="dashboard-01-chunk-4"
+        >
+          <CardHeader className="flex flex-row items-center">
+            <div className="grid gap-2">
+              <CardTitle>Transactions</CardTitle>
+              <CardDescription>
+                Recent transactions from your store.
+              </CardDescription>
             </div>
 
-            <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-                <Card
-                    className="xl:col-span-2" x-chunk="dashboard-01-chunk-4"
-                >
-                    <CardHeader className="flex flex-row items-center">
-                        <div className="grid gap-2">
-                            <CardTitle>Transactions</CardTitle>
-                            <CardDescription>
-                                Recent transactions from your store.
-                            </CardDescription>
-                        </div>
-
-                        {/* <Button asChild size="sm" className="ml-auto gap-1">
+            {/* <Button asChild size="sm" className="ml-auto gap-1">
                                 <Link href="#">
                                     View All
                                     <ArrowUpRight className="h-4 w-4" />
                                 </Link>
                             </Button> */}
-
-                    </CardHeader>
-                    {/* <CardContent>
+          </CardHeader>
+          {/* <CardContent>
                         <Table>
                             <TableHeader>
                                 <TableRow>
@@ -251,12 +264,12 @@ const AdminDashboard = () => {
                             </TableBody>
                         </Table>
                     </CardContent> */}
-                </Card>
-                <Card x-chunk="dashboard-01-chunk-5">
-                    <CardHeader>
-                        <CardTitle>Recent Sales</CardTitle>
-                    </CardHeader>
-                    {/* <CardContent className="grid gap-8">
+        </Card>
+        <Card x-chunk="dashboard-01-chunk-5">
+          <CardHeader>
+            <CardTitle>Recent Sales</CardTitle>
+          </CardHeader>
+          {/* <CardContent className="grid gap-8">
                         <div className="flex items-center gap-4">
                             <Avatar className="hidden h-9 w-9 sm:flex">
                                 <AvatarImage src="/avatars/01.png" alt="Avatar" />
@@ -333,11 +346,10 @@ const AdminDashboard = () => {
                             <div className="ml-auto font-medium">+$39.00</div>
                         </div>
                     </CardContent> */}
-                </Card>
-            </div>
-
-        </>
-    );
+        </Card>
+      </div>
+    </>
+  );
 };
 
-export default AdminDashboard
+export default AdminDashboard;
