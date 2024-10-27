@@ -17,16 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "credentials") return true;
-      if (account?.provider === "google") {
-        try {
-          const { email, name, image } = user;
-          await connectMongoDB();
-          const existingUser = await User.findOne({ email });
-          if (!existingUser)
-            await User.create({ email, name, image, providerId: "google" });
-          else return true;
-        } catch (error) {}
-      }
+
       return true;
     },
     async session({ session, token }) {
