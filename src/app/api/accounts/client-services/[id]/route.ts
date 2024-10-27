@@ -7,8 +7,8 @@ export async function GET(
 ) {
   const data = await fetch(
     `${
-      process.env.AUTH_URL || "http://localhost:3000/"
-    }api/accounts/client-services/`,
+      process.env.AUTH_URL || "http://localhost:3000"
+    }/api/accounts/client-services/`,
     {
       cache: "no-store",
     }

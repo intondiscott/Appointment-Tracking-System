@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Search, CircleUser } from "lucide-react";
-import { auth } from "@/auth";
+//import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { LogOut } from "@/app/action/user";
