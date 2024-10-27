@@ -9,7 +9,7 @@ const AllClients = async () => {
   const getData = async () => {
     await connectMongoDB();
     const res = await fetch(
-      `${process.env.AUTH_URL}/api/accounts/client-services`,
+      `https://appointment-tracking-system.vercel.app/api/accounts/client-services`,
       {
         next: { revalidate: 0 },
       }

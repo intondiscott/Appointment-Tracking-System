@@ -20,7 +20,7 @@ import { IconLeft } from "react-day-picker";
 export default async function Clients(props: any) {
   const getData = async () => {
     const res = await fetch(
-      `${process.env.AUTH_URL}/api/accounts/${props.id}`,
+      `https://appointment-tracking-system.vercel.app/api/accounts/${props.id}`,
       {
         next: { revalidate: 0 },
       }
