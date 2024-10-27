@@ -7,7 +7,7 @@ export async function GET(
   { params: { id } }: { params: { id: string } }
 ) {
   const data = await fetch(
-    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/accounts/`,
+    `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/accounts/`,
     {
       cache: "no-store",
     }

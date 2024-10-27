@@ -6,7 +6,7 @@ export async function GET(
 ) {
   //const res = fetch("http://localhost:3000/api");
   const data = await fetch(
-    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/accounts/`,
+    `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/accounts/`,
     {
       cache: "no-store",
     }
