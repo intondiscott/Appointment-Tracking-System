@@ -4,7 +4,7 @@ const connectMongoDB = async () => {
   let message = {};
   try {
     let URL: string =
-      process.env.MONGO_URI! || "mongodb://127.0.0.1:27017/bespokeDB";
+      process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bespokeDB";
     await mongoose.connect(URL);
 
     message = { message: "MongoDB connected..." };

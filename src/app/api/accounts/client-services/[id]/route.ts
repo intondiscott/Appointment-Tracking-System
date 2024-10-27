@@ -7,8 +7,8 @@ export async function GET(
 ) {
   const data = await fetch(
     `${
-      process.env.VERCEL_URL || "http://localhost:3000"
-    }/api/accounts/client-services/`,
+      process.env.VERCEL_URL || "http://localhost:3000/"
+    }api/accounts/client-services/`,
     {
       cache: "no-store",
     }
