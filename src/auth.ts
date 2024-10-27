@@ -32,6 +32,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             await User.create({ email, name, image, providerId: "google" });
           else return true;
         } catch (error) {}
+        return true;
       }
       return true;
     },

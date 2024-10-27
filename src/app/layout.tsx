@@ -41,13 +41,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col">
-            <Header />
-            <div className="min-h-full">{children}</div>
-            <div className="top-10 sticky">
-              <Footer />
-            </div>
-          </div>
+          <Header />
+          {children}
+
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

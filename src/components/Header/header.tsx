@@ -36,13 +36,6 @@ type HeaderItem = {
 };
 
 const Header = async () => {
-  // Fetch header data
-
-  const fetchData = async () => {
-    const res = await fetch("http://localhost:3000/api/UI_Template");
-    const data = await res.json();
-  };
-
   const session = await getSession();
   const email = session?.user?.email as string;
   const user = await User.findOne({ email });

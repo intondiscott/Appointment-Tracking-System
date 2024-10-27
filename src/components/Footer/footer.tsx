@@ -4,7 +4,7 @@ import Image from "next/image";
 function Footer() {
   const copyrightYear = new Date();
   return (
-    <div className=" flex justify-center h-20 bg-slate-800 text-white font-black">
+    <div className=" sticky  top-[900px] flex justify-center h-20 bg-slate-800 text-white font-black">
       <div className="flex m-2 ">
         <span className="pt-4">
           EmbedtheDead &copy;{copyrightYear.getFullYear()}
