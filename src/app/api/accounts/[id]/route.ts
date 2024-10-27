@@ -6,12 +6,9 @@ export async function GET(
   req: NextRequest,
   { params: { id } }: { params: { id: string } }
 ) {
-  const data = await fetch(
-    `${process.env.AUTH_URL || "http://localhost:3000"}/api/accounts/`,
-    {
-      cache: "no-store",
-    }
-  );
+  const data = await fetch(`${process.env.AUTH_URL}/api/accounts/`, {
+    cache: "no-store",
+  });
   const returnedData = await data.json();
   let clientFound = { clientError: "Client doesn't exist" };
   returnedData.map((client: any) => {

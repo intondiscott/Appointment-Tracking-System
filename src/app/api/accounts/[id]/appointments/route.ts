@@ -5,12 +5,9 @@ export async function GET(
   { params: { id } }: { params: { id: string } }
 ) {
   //const res = fetch("http://localhost:3000/api");
-  const data = await fetch(
-    `${process.env.AUTH_URL || "http://localhost:3000"}/api/accounts/`,
-    {
-      cache: "no-store",
-    }
-  );
+  const data = await fetch(`${process.env.AUTH_URL}/api/accounts/`, {
+    cache: "no-store",
+  });
   const returnedData = await data.json();
 
   return NextResponse.json(
