@@ -39,7 +39,9 @@ const Header = async () => {
   const session = await getSession();
   const email = session?.user?.email as string;
   const user = await User.findOne({ email });
-  const res = await fetch("http://localhost:3000/api/UI_Template");
+  const res = await fetch(
+    `${process.env.AUTH_URL || "http://localhost:3000"}/api/UI_Template`
+  );
   const data = await res.json();
   return (
     <>

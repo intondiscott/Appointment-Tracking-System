@@ -7,7 +7,7 @@ export async function GET(
   { params: { id } }: { params: { id: string } }
 ) {
   const data = await fetch(
-    `https://appointment-tracking-system.vercel.app/api/accounts/`,
+    `${process.env.AUTH_URL || "http://localhost:3000"}/api/accounts/`,
     {
       cache: "no-store",
     }

@@ -21,7 +21,9 @@ import { getSession } from "@/lib/getSession";
 export default async function Services(props: any) {
   const getData = async () => {
     const res = await fetch(
-      `https://appointment-tracking-system.vercel.app/api/accounts/client-services/${props.id}`,
+      `${
+        process.env.AUTH_URL || "http://localhost:3000"
+      }/api/accounts/client-services/${props.id}`,
       {
         next: { revalidate: 0 },
       }
