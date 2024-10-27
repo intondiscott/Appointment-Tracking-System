@@ -20,7 +20,7 @@ import { IconLeft } from "react-day-picker";
 export default async function Clients(props: any) {
   const getData = async () => {
     const res = await fetch(
-      `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/accounts/${
+      `${process.env.AUTH_URL || "http://localhost:3000"}/api/accounts/${
         props.id
       }`,
       {

@@ -72,7 +72,7 @@ export default function ClientServiceForm(props: any) {
   const formStuff = async () => {
     const res = await fetch(
       `${
-        process.env.VERCEL_URL || "http://localhost:3000"
+        process.env.AUTH_URL || "http://localhost:3000"
       }/api/accounts/client-services/`,
       {
         next: { revalidate: 0 },
