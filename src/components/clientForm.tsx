@@ -43,13 +43,12 @@ export default function ClientForm(props: any) {
   });
 
   const formStuff = async () => {
-    const res = await fetch(
-      `${process.env.AUTH_URL}/api/accounts/${props.id}`,
-      {
-        next: { revalidate: 0 },
-      }
-    );
+    const res = await fetch(`/api/accounts/${props.id}`, {
+      next: { revalidate: 0 },
+    });
+
     const data = await res.json();
+    console.log("data: " + data);
     return { ...data };
   };
 

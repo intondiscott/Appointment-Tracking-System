@@ -72,12 +72,9 @@ export default function ClientServiceForm(props: any) {
   });
 
   const formStuff = async () => {
-    const res = await fetch(
-      `${process.env.AUTH_URL}/api/accounts/client-services/${props.id}`,
-      {
-        next: { revalidate: 0 },
-      }
-    );
+    const res = await fetch(`/api/accounts/client-services/${props.id}`, {
+      next: { revalidate: 0 },
+    });
     const data = await res.json();
     return { ...data };
   };
