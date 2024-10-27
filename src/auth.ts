@@ -9,12 +9,6 @@ import { redirect } from "next/navigation";
 import Google from "next-auth/providers/google";
 
 import connectMongoDB from "@/app/Database/connectDB";
-export const config = {
-  unstable_allowDynamic: [
-    "/lib/utilities.js", // allows a single file
-    "/node_modules/function-bind/**", // use a glob to allow anything in the function-bind 3rd party module
-  ],
-};
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
